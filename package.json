@@ -1,0 +1,24 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "description": "Simple Zoho integrations for Node.js",
+  "main": "build/node-zoho.js",
+  "private": false,
+  "author": "Picatic E-Tickets Inc.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/picatic/node-zoho.git"
+  },
+  "dependencies": {
+    "async": "",
+    "underscore": "",
+    "xml2js": "0.4.1"
+  },
+  "devDependencies": {
+    "grunt": "0.4.2",
+    "grunt-jasmine-node": "~0.1.0",
+    "grunt-contrib-coffee": "~0.6.2",
+    "grunt-coffeelint": "0.0.6",
+    "grunt-contrib-watch": "~0.3.1"
+  }
+}
