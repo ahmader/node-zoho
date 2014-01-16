@@ -8,7 +8,7 @@
       var req;
       req = https.request(reqUrl, function(res) {
         var chunks;
-        chunks = void 0;
+        chunks = "";
         res.on('data', function(chunk) {
           if ((chunk != null ? chunk.status : void 0) === "error") {
             return cb(new Error("Recieved error: " + chunk), null);

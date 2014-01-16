@@ -14,39 +14,42 @@
   helpers = require("./helpers");
 
   Zoho = (function() {
-    Zoho.prototype.authDefaults = {
-      host: "accounts.zoho.com",
-      port: 443,
-      path: "/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi"
-    };
-
-    Zoho.prototype.crmApiDefaults = {
-      host: "crm.zoho.com",
-      port: 443,
-      path: {
-        api: "crm",
-        access: "private",
-        encoding: "xml",
-        resource: "Leads",
-        method: "insertRecords"
-      },
-      query: {
-        scope: "crmapi",
-        authToken: void 0
+    function Zoho(options) {
+      if (options == null) {
+        options = {};
       }
-    };
-
-    Zoho.prototype.xmlBuilderOpts = {
-      renderOpts: {
-        pretty: false
-      },
-      xmldec: {
-        version: "1.0",
-        encoding: "UTF-8"
+      this.authDefaults = {
+        host: "accounts.zoho.com",
+        port: 443,
+        path: "/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi"
+      };
+      this.crmApiDefaults = {
+        host: "crm.zoho.com",
+        port: 443,
+        path: {
+          api: "crm",
+          access: "private",
+          encoding: "xml",
+          resource: "Leads",
+          method: "insertRecords"
+        },
+        query: {
+          scope: "crmapi",
+          authToken: void 0
+        }
+      };
+      this.xmlBuilderOpts = {
+        renderOpts: {
+          pretty: false
+        },
+        xmldec: {
+          version: "1.0",
+          encoding: "UTF-8"
+        }
+      };
+      if (options != null ? options.authToken : void 0) {
+        this.crmApiDefaults.query.authToken = options != null ? options.authToken : void 0;
       }
-    };
-
-    function Zoho() {
       return this;
     }
 
@@ -104,7 +107,30 @@
         },
         method: "POST"
       });
-      helpers.request(insertUrl, cb);
+      return helpers.request(insertUrl, function(err, zohoRes) {
+        return xml2js.parseString(zohoRes, function(err, xml) {
+          if (err) {
+            return cb(err, null);
+          } else {
+            return cb(null, xml);
+          }
+        });
+      });
+    };
+
+    Zoho.prototype.getRecords = function(resource, params, cb) {
+      /*
+      insertUrl = @_buildQueryUrl({
+        path:
+          resource: resource
+          method: "insertRecords"
+        query:
+          selectColumns: "all"
+          searchCondition:
+          version: 2
+      })
+      */
+
     };
 
     Zoho.prototype._buildQueryUrl = function(urlObj) {

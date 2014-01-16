@@ -1,8 +1,8 @@
 {
-  "name": "",
-  "version": "0.0.0",
+  "name": "node-zoho",
+  "version": "0.0.2",
   "description": "Simple Zoho integrations for Node.js",
-  "main": "build/node-zoho.js",
+  "main": "build/lib/node-zoho.js",
   "private": false,
   "author": "Picatic E-Tickets Inc.",
   "repository": {

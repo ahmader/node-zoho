@@ -3,7 +3,7 @@ https = require("https")
 module.exports = {
   request: (reqUrl, cb) ->
     req = https.request(reqUrl, (res) ->
-      chunks = undefined
+      chunks = ""
 
       res.on('data', (chunk) ->
         if chunk?.status == "error"

@@ -10,12 +10,12 @@ module.exports = function(grunt) {
       compile: {
         files: [
           {
-          expand: true,
-          flatten: false,
-          cwd: 'src/',
-          src: ['**/*.coffee'],
-          dest: 'build/',
-          ext: '.js'
+            expand: true,
+            flatten: false,
+            cwd: 'src/',
+            src: ['**/*.coffee'],
+            dest: 'build/',
+            ext: '.js'
           }
         ]
       }

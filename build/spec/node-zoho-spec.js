@@ -13,7 +13,7 @@
     var done, errors, lead, options, results;
     results = errors = done = void 0;
     options = {
-      authToken: "5d87c47daf8c9d836b65fa6269e06e6d"
+      authToken: ""
     };
     lead = {
       "Lead Source": "Site Registration",
@@ -72,14 +72,22 @@
             spyOn(zohoApi, "_buildRecordsXmlObj").andReturn({});
             mockBuilder = {
               buildObject: function() {
-                return "fuck";
+                return "wicked";
               }
             };
             spyOn(xml2js, "Builder").andReturn(mockBuilder);
             xmlBuilder = new xml2js.Builder();
             spyOn(xmlBuilder, "buildObject").andReturn("");
             spyOn(zohoApi, "_buildQueryUrl").andReturn("b");
-            return spyOn(help, "request").andCallFake(function() {
+            spyOn(help, "request").andCallFake(function() {
+              var cb;
+              cb = arguments[arguments.length - 1];
+              if (typeof cb !== "function") {
+                throw new Error("mockModelCb: the cb called is not a function.");
+              }
+              return setImmediate(cb, null, "All Good");
+            });
+            return spyOn(xml2js, "parseString").andCallFake(function() {
               var cb;
               cb = arguments[arguments.length - 1];
               if (typeof cb !== "function") {

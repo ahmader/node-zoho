@@ -9,7 +9,7 @@ describe "node-zoho", ->
   results = errors = done = undefined
 
   options =
-    authToken: "5d87c47daf8c9d836b65fa6269e06e6d"
+    authToken: ""
 
   lead =
     "Lead Source" : "Site Registration"
@@ -62,7 +62,7 @@ describe "node-zoho", ->
 
           mockBuilder = {
             buildObject: () ->
-              return "fuck"
+              return "wicked"
           }
           spyOn(xml2js, "Builder").andReturn(mockBuilder)
           xmlBuilder = new xml2js.Builder()
@@ -72,8 +72,16 @@ describe "node-zoho", ->
 
           spyOn(zohoApi, "_buildQueryUrl").andReturn("b")
 
-
           spyOn(help, "request").andCallFake( ->
+            cb = arguments[arguments.length-1]
+
+            if typeof cb != "function"
+              throw new Error("mockModelCb: the cb called is not a function.")
+
+            setImmediate(cb, null, "All Good")
+          )
+
+          spyOn(xml2js, "parseString").andCallFake( ->
             cb = arguments[arguments.length-1]
 
             if typeof cb != "function"

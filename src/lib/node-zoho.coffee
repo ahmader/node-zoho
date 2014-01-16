@@ -8,32 +8,36 @@ helpers = require("./helpers")
 
 class Zoho
   # defaults
-  authDefaults:
-    host: "accounts.zoho.com"
-    port: 443
-    path: "/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi"
 
-  crmApiDefaults:
-    host: "crm.zoho.com"
-    port: 443
-    path:
-      api: "crm"
-      access: "private"
-      encoding: "xml"
-      resource: "Leads"
-      method: "insertRecords"
-    query:
-      scope: "crmapi"
-      authToken: undefined
+  constructor: (options = {}) ->
+    @authDefaults =
+      host: "accounts.zoho.com"
+      port: 443
+      path: "/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi"
 
-  xmlBuilderOpts:
-    renderOpts:
-      pretty: false
-    xmldec:
-      version: "1.0"
-      encoding: "UTF-8"
+    @crmApiDefaults =
+      host: "crm.zoho.com"
+      port: 443
+      path:
+        api: "crm"
+        access: "private"
+        encoding: "xml"
+        resource: "Leads"
+        method: "insertRecords"
+      query:
+        scope: "crmapi"
+        authToken: undefined
 
-  constructor: ->
+    @xmlBuilderOpts =
+      renderOpts:
+        pretty: false
+      xmldec:
+        version: "1.0"
+        encoding: "UTF-8"
+
+    if options?.authToken
+      @crmApiDefaults.query.authToken = options?.authToken
+
     return @
 
   generateAuthToken: (email, password, cb) ->
@@ -90,8 +94,28 @@ class Zoho
       method: "POST"
     })
 
-    helpers.request(insertUrl, cb)
-    return
+    helpers.request(insertUrl, (err, zohoRes) ->
+      xml2js.parseString(zohoRes, (err, xml) ->
+        if err
+          cb(err, null)
+        else
+          cb(null, xml)
+      )
+    )
+
+  getRecords: (resource, params, cb) ->
+    ###
+    insertUrl = @_buildQueryUrl({
+      path:
+        resource: resource
+        method: "insertRecords"
+      query:
+        selectColumns: "all"
+        searchCondition:
+        version: 2
+    })
+    ###
+
 
 
   _buildQueryUrl: (urlObj) ->
