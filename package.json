@@ -1,6 +1,6 @@
 {
   "name": "node-zoho",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Simple Zoho integrations for Node.js",
   "main": "src/lib/node-zoho.coffee",
   "private": false,
