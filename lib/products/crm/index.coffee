@@ -1,0 +1,35 @@
+BaseProduct = require('../../base-product')
+
+class CrmProduct extends BaseProduct
+  name: 'crm'
+
+  getModules: ->
+    return ['Leads']
+
+  getModule: (module_name) ->
+    try
+      module_path = "./#{module_name}"
+      require.resolve(module_path)
+      module_class = require(module_path)
+    catch err
+      throw new Error(err)
+
+    instance = new module_class(@)
+
+    return instance
+
+  getScope: ->
+    return 'crmapi'
+
+  getBaseUrl: ->
+    return {
+      hostname: 'crm.zoho.com'
+      protocol: 'https'
+      query: {
+        authtoken: @zoho.authToken
+        scope: @getScope()
+      }
+      path: [ @name ]
+    }
+
+module.exports = CrmProduct

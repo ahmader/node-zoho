@@ -14,6 +14,7 @@ module.exports = function(grunt) {
       forceExit: true,
       useCoffee: true,
       extensions: 'coffee',
+      verbose: false,
       jUnit: {
         report: true,
         savePath : "./reports/jasmine/",

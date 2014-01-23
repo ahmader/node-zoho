@@ -7,7 +7,7 @@ xml2js = require("xml2js")
 helpers = require("./helpers")
 
 class Zoho
-  # defaults
+  authToken: null
 
   constructor: (options = {}) ->
     @authDefaults =
@@ -15,28 +15,8 @@ class Zoho
       port: 443
       path: "/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi"
 
-    @crmApiDefaults =
-      host: "crm.zoho.com"
-      port: 443
-      path:
-        api: "crm"
-        access: "private"
-        encoding: "xml"
-        resource: "Leads"
-        method: "insertRecords"
-      query:
-        scope: "crmapi"
-        authToken: undefined
-
-    @xmlBuilderOpts =
-      renderOpts:
-        pretty: false
-      xmldec:
-        version: "1.0"
-        encoding: "UTF-8"
-
     if options?.authToken
-      @crmApiDefaults.query.authToken = options?.authToken
+      @authToken = options?.authToken
 
     return @
 
@@ -75,50 +55,15 @@ class Zoho
         return cb(null, results)
     )
 
+  getProduct: (productName) ->
+    Crm = require './products/crm'
+    return new Crm(@)
 
-  insertRecords: (resource, records, cb) ->
-    xmlObj = @_buildRecordsXmlObj(records)
-
-    @xmlBuilderOpts.rootName = resource
-    xmlBuilder = new xml2js.Builder(@xmlBuilderOpts)
-
-    xmlString = xmlBuilder.buildObject(xmlObj)
-
-    insertUrl = @_buildQueryUrl({
-      path:
-        resource: resource
-        method: "insertRecords"
-      query:
-        newFormat: 1
-        xmlData: xmlString
-      method: "POST"
-    })
-
-    helpers.request(insertUrl, (err, zohoRes) ->
-      xml2js.parseString(zohoRes, (err, xml) ->
-        if err
-          cb(err, null)
-        else
-          if response?.error
-            cb(new Error(response.error),null)
-          else
-            cb(null, xml)
-      )
-    )
-
-  getRecords: (resource, params, cb) ->
-    ###
-    insertUrl = @_buildQueryUrl({
-      path:
-        resource: resource
-        method: "insertRecords"
-      query:
-        selectColumns: "all"
-        searchCondition:
-        version: 2
-    })
-    ###
-
+  execute: (product, module, call) ->
+    args = Array.prototype.slice.call(arguments)
+    productInstance = @getProduct(product)
+    moduleInstance = productInstance.getModule(module)
+    moduleInstance[call].apply(moduleInstance,args.slice(3))
 
 
   _buildQueryUrl: (urlObj) ->
