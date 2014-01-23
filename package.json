@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "Simple Zoho integrations for Node.js",
   "keywords": [ "zoho" ],
-  "main": "src/lib/node-zoho.coffee",
+  "main": "build/node-zoho",
   "private": false,
   "homepage": "https://github.com/picatic/node-zoho",
   "bugs": "https://github.com/picatic/node-zoho/issues",
@@ -28,5 +28,9 @@
     "grunt-jasmine-node": "~0.1.0",
     "grunt-coffeelint": "0.0.6",
     "grunt-contrib-watch": "~0.3.1"
+  },
+  "scripts": {
+    "prepublish": "coffee --bare --compile --output build lib/*.coffee"
   }
+
 }

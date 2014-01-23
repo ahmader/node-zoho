@@ -1,0 +1,4 @@
+lib
+reports
+spec/config.json
+*.tgz
