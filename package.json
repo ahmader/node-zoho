@@ -2,9 +2,17 @@
   "name": "node-zoho",
   "version": "0.0.4",
   "description": "Simple Zoho integrations for Node.js",
+  "keywords": [ "zoho" ],
   "main": "src/lib/node-zoho.coffee",
   "private": false,
-  "author": "Picatic E-Tickets Inc.",
+  "homepage": "https://github.com/picatic/node-zoho",
+  "bugs": "https://github.com/picatic/node-zoho/issues",
+  "license": "MIT",
+  "author": "Picatic E-Tickets Inc. <api@picatic.com>",
+  "contributors": [],
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/picatic/node-zoho.git"
