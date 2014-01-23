@@ -2,34 +2,21 @@ module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
       all: {
-        files: ['src/lib/**/*', 'src/spec/**/*'],
-        tasks: ['coffeelint:app', 'coffeelint:spec', 'coffee', 'jasmine_node']
-      }
-    },
-    coffee: {
-      compile: {
-        files: [
-          {
-            expand: true,
-            flatten: false,
-            cwd: 'src/',
-            src: ['**/*.coffee'],
-            dest: 'build/',
-            ext: '.js'
-          }
-        ]
+        files: ['lib/**/*', 'spec/**/*'],
+        tasks: ['coffeelint:app', 'coffeelint:spec', 'jasmine_node']
       }
     },
     jasmine_node: {
-      projectRoot: "./src/spec",
-      source: './src/lib',
-      verbose: false,
-      useHelpers: true,
+      specNameMatcher: "spec",
+      source: "lib",
+      projectRoot: "./spec",
+      requirejs: false,
+      forceExit: true,
       useCoffee: true,
       extensions: 'coffee',
       jUnit: {
         report: true,
-        savePath: "./reports/jasmine/"
+        savePath : "./reports/jasmine/",
       }
     },
     coffeelint: {
@@ -38,16 +25,19 @@ module.exports = function(grunt) {
           level: 'ignore'
         }
       },
-      app: ['src/lib/**/*.coffee'],
+      app: {
+        files: {
+          src: ['spec/**/*.coffee']
+        }
+      },
       spec: {
         files: {
-          src: ['src/spec/**/*.coffee']
+          src: ['spec/**/*.coffee']
         }
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jasmine-node');

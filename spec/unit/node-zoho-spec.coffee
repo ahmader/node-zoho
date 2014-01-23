@@ -1,6 +1,6 @@
 xml2js = require("xml2js")
-help = require("../lib/helpers")
-zoho = require("../lib/node-zoho")
+help = require("../../lib/helpers")
+zoho = require("../../lib/node-zoho")
 
 zohoApi = undefined
 
@@ -9,7 +9,7 @@ describe "node-zoho", ->
   results = errors = done = undefined
 
   options =
-    authToken: ""
+    authToken: "TESTTOKEN"
 
   lead =
     "Lead Source" : "Site Registration"
@@ -18,7 +18,7 @@ describe "node-zoho", ->
     Email: "belfordz66@gmail.com"
 
   beforeEach ->
-    zohoApi = new zoho()
+    zohoApi = new zoho(options)
     done = false
     results = errors = undefined
 
@@ -26,6 +26,9 @@ describe "node-zoho", ->
 
     it "exists", ->
       expect(typeof zoho).toBe("function")
+
+    it "sets @crmApiDefaults.query.authToken", ->
+      expect(zohoApi.crmApiDefaults.query.authToken).toEqual(options.authToken)
 
   describe "instance", ->
 

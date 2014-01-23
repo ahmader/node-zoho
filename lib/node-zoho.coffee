@@ -99,7 +99,10 @@ class Zoho
         if err
           cb(err, null)
         else
-          cb(null, xml)
+          if response?.error
+            cb(new Error(response.error),null)
+          else
+            cb(null, xml)
       )
     )
 
