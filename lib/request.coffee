@@ -1,5 +1,6 @@
-https = require('https')
+request = require('request')
 url = require('url')
+_ = require('underscore')
 
 Response = require('./response')
 
@@ -15,17 +16,14 @@ class Request
     return
 
   request: (cb) ->
-    requestUrl = url.parse(url.format(@_request))
-
-    req = https.request(requestUrl, (response) ->
-      @response = new Response(response, cb)
-      response.on('data', @response.handleChunk.bind(@response))
-      response.on("end", @response.handleEnd.bind(@response))
-    )
-    req.end()
-
-    req.on('error', (err) ->
-      return cb(err, null)
+    options = _.pick(@_request,['method'])
+    options.uri = url.format(@_request)
+    request(options, (error, response, body) =>
+      @response = new Response(response)
+      if error
+        cb(error,null)
+      else
+        @response.parseBody(body,cb)
     )
 
 
