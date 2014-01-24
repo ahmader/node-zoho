@@ -44,5 +44,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jasmine-node');
 
   grunt.registerTask('default', ['coffeelint', 'jasmine_node'] );
+  grunt.registerTask('travis-ci', ['coffeelint', 'jasmine_node'] );
   grunt.registerTask('release', ['bump_version','do_release'] );
 };

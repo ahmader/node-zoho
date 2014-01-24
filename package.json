@@ -30,7 +30,8 @@
     "grunt-contrib-watch": "~0.3.1"
   },
   "scripts": {
-    "prepublish": "coffee --bare --compile --output build lib"
+    "prepublish": "coffee --bare --compile --output build lib",
+    "test": "grunt travis-ci"
   }
 
 }
