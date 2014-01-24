@@ -1,10 +1,12 @@
 Response = require('../../lib/response')
 
 describe 'response', ->
-  response = undefined
+  response = r = body = undefined
 
   beforeEach ->
-    response = new Response()
+    r = {}
+    body = ""
+    response = new Response(r)
 
   it 'has message', ->
     expect(response.message).toBeDefined()
@@ -18,27 +20,18 @@ describe 'response', ->
   describe 'constructor', ->
 
     it 'requires https response', ->
+      expect( () -> new Response() ).toThrow("Requires response")
 
-  describe 'handleChunk', ->
+  describe 'parseResponse', ->
 
-    it "callsbacks with error", ->
+    it 'requires body param', ->
+      expect(() -> response.parseBody()).toThrow('Requires body')
 
-    it "appends to _data", ->
+    it 'requires cb param', ->
+      expect(() -> response.parseBody({})).toThrow('Requires callback')
 
-  describe 'handleEnd', ->
-
-    it 'callsback with error on non 200 response', ->
-
-    it 'calls parseResponse', ->
-
-  describe '_parseResponse', ->
     it 'returns XML error on invalid XML', ->
 
     it 'returns error on error formatted response' , ->
 
     it 'returns response with no error on valid response', ->
-
-
-
-
-

@@ -4,50 +4,51 @@ _ = require('underscore')
 class Response
 
   # instance values
-  message: null
-  type: null
-  data: null
-  code: null
+  message:   null
+  type:      null
+  data:      null
+  code:      null
   _response: null
-  _data: ""
-  _cb: null
+  _data:     null
 
   # constuctor
-  constructor: (@_response, @_cb) ->
+  constructor: (@_response) ->
+    if @_response is undefined
+      throw new Error('Requires response')
     return
-
-  handleChunk: (chunk) ->
-    if chunk?.status == "error"
-      @_cb(new Error("Recieved error: #{chunk}"), null)
-    else
-      @_data += chunk
-
-  handleEnd: () ->
-    if @_response.statusCode isnt 200
-      @_handleError()
-    else
-      @_parseResponse()
 
   isError: () ->
     if @code != null
       return true
     return false
 
-  _handleError: ->
-    @_cb(new Error("Bad Status code: #{res.statusCode}"), null)
+  parseBody: (body, cb) ->
+    if not body
+      throw new Error('Requires body')
+    if not cb
+      throw new Error('Requires callback')
 
-  _parseResponse: ->
-    xml2js.parseString(@_data, (err, data) =>
+    @_data = body
+    xml2js.parseString @_data, (err, data) =>
       if err
-        @_cb(err, null)
+        return cb(err, null)
       else
         @data = data
         if @data?.response?.error
           error = @data.response.error
-          if @error?.code then @code = @error.code
-          if @error?.message then @message = @error.message
-          @_cb(new Error(@message),@)
+
+          if @error?.code
+            @code = @error.code
+
+          if @error?.message
+            @message = @error.message
+          else
+            @message = "Unknown Error"
+
+          return cb(new Error(@message),@)
+
         else
+
           if @data?.response?.result
             if _.isArray(@data?.response?.result) and @data?.response?.result.length == 1
               record = _.first(@data?.response?.result)
@@ -60,10 +61,9 @@ class Response
                 @data = record
 
             else
-              throw new Error("Multi result arrays not handled")
+              return cb(new Error("Multi result arrays not handled"), @)
 
-          @_cb(null, @)
-    )
+          return cb(null, @)
 
 
 module.exports = Response
