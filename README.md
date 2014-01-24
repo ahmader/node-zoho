@@ -1,5 +1,8 @@
 Zoho CRM rest api wrapper for node.js
 
+[![Build Status](https://travis-ci.org/picatic/node-zoho.png?branch=master)](https://travis-ci.org/picatic/node-zoho)
+[![Code Climate](https://codeclimate.com/github/picatic/node-zoho.png)](https://codeclimate.com/github/picatic/node-zoho)
+
 currently supports:
  - authentication
  - insertingRecord on all resources

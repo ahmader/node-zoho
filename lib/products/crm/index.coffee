@@ -8,6 +8,7 @@ class CrmProduct extends BaseProduct
 
   getModule: (module_name) ->
     try
+      module_name = module_name.toLowerCase()
       module_path = "./#{module_name}"
       require.resolve(module_path)
       module_class = require(module_path)
