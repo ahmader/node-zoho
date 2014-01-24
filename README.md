@@ -1,7 +1,7 @@
 Zoho CRM rest api wrapper for node.js
 
 [![Build Status](https://travis-ci.org/picatic/node-zoho.png?branch=master)](https://travis-ci.org/picatic/node-zoho)
-[![Code Climate](https://codeclimate.com/github/picatic/node-zoho.png)](https://codeclimate.com/github/picatic/node-zoho)
+[![NPM version](https://badge.fury.io/js/node-zoho.png)](http://badge.fury.io/js/node-zoho)
 
 currently supports:
  - authentication
@@ -38,3 +38,5 @@ zoho.execute('crm','Leads','insertRecords',records, function(err, result) {
 # Contribute
 
 All the code is coffescript, but we deploy compiled js to npm. If you want to help, checkout the git repo and submit a PR.
+
+[![NPM](https://nodei.co/npm/node-zoho.png?downloads=true)](https://nodei.co/npm/node-zoho/)
