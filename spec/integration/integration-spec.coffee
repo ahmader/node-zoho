@@ -2,34 +2,41 @@ help = require("../../lib/helpers")
 zoho = require("../../lib/node-zoho")
 config = require('../config.json')
 
-describe "integration", ->
-  results = errors = done = za = undefined
 
-  beforeEach ->
-    results = errors = done = undefined
-    za = new zoho({
-      authToken: config.authToken
-    })
+# only run when we have a token
+if config.authToken and config.enabled
+
+  describe "integration", ->
+    response = errors = done = za = undefined
+
+    beforeEach ->
+      response = errors = done = undefined
+      za = new zoho({
+        authToken: config.authToken
+      })
 
 
-  it "can create lead", ->
+    it "can create lead", ->
+      lead =
+        "Lead Source" : "Site Registration"
+        "First Name"  : "Test"
+        "Last Name"   : "Testerson"
+        "Email"       : "test@testerson.com"
 
-    lead =
-      "Lead Source" : "Site Registration"
-      "First Name"  : "Test"
-      "Last Name"   : "Testerson"
-      "Email"       : "test@testerson.com"
+      runs ->
+        za.execute('crm','Leads','insertRecords',[lead], (err, _response) ->
+          errors = err
+          response = _response
+          done = true
+        )
 
-    runs ->
-      za.insertRecords("leads", lead, (err, res) ->
-        errors = err
-        results = res
-        done = true
-      )
+      waitsFor ->
+        return done
 
-    waitsFor ->
-      return done
+      runs ->
+        console.log(response.data)
+        expect(errors).toBe(null)
+        expect(response).toBeDefined()
 
-    runs ->
-      expect(errors).toBe(null)
+        # expect(results.isError()).toBeFalsy()
 
