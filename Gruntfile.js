@@ -3,21 +3,22 @@ module.exports = function(grunt) {
     watch: {
       all: {
         files: ['lib/**/*', 'spec/**/*'],
-        tasks: ['coffeelint:app', 'coffeelint:spec', 'jasmine_node']
+        tasks: ['coffeelint', 'spec:unit']
       }
     },
-    jasmine_node: {
-      specNameMatcher: "spec",
-      source: "lib",
-      projectRoot: "./spec",
-      requirejs: false,
-      forceExit: true,
-      useCoffee: true,
-      extensions: 'coffee',
-      verbose: false,
-      jUnit: {
-        report: true,
-        savePath : "./reports/jasmine/",
+    spec: {
+      options: {
+        minijasminenode: {
+          showColors: true
+        }
+      },
+      unit: {
+        options: {
+          specs: 'spec/unit/**/*.{js,coffee}'
+        }
+      },
+      integration: {
+        specs: 'spec/integration/**/*.{js,coffee}'
       }
     },
     coffeelint: {
@@ -41,9 +42,9 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-jasmine-bundle');
 
-  grunt.registerTask('default', ['coffeelint', 'jasmine_node'] );
-  grunt.registerTask('travis-ci', ['coffeelint', 'jasmine_node'] );
+  grunt.registerTask('default', ['coffeelint', 'spec:unit'] );
+  grunt.registerTask('travis-ci', ['coffeelint', 'spec:unit'] );
   grunt.registerTask('release', ['bump_version','do_release'] );
 };

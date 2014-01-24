@@ -37,6 +37,8 @@ describe 'leads', ->
       spyOn(Request.prototype,'request').andCallFake( (cb) ->
         setImmediate(cb,null,response)
       )
+      spyOn(leads,'buildUrl').andReturn({})
+      spyOn(leads,'processRecord').andReturn({})
 
     it 'requires array', ->
       expect( () -> leads.insertRecords(record,() -> ) ).toThrow('Requires array of records')
@@ -48,10 +50,91 @@ describe 'leads', ->
       leads.insertRecords([record],undefined)
       expect(leads.build).toHaveBeenCalledWith([record])
 
+    it 'builds Url', ->
+      leads.insertRecords([record],undefined)
+      expect(leads.buildUrl).toHaveBeenCalledWith(
+        {newFormat:1,xmlData:'<?xml version="1.0" encoding="UTF-8"?><Leads/>'},
+        ['insertRecords'],
+        {method:'POST'}
+      )
+
     it 'calls callback with response', ->
       r = undefined
       runs ->
         leads.insertRecords([record], (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
+
+  describe 'getRecordById', ->
+    next = response = undefined
+
+    beforeEach ->
+      next = false
+      response = new Response()
+      spyOn(leads,'buildUrl').andReturn({})
+      spyOn(Request.prototype,'request').andCallFake( (cb) ->
+        setImmediate(cb,null,response)
+      )
+
+    it 'requires record id param', ->
+      expect( () -> leads.getRecordById() ).toThrow('Requires an Id to fetch')
+
+    it 'build Url', ->
+      leads.getRecordById('1234567890123456',undefined)
+      expect(leads.buildUrl).toHaveBeenCalledWith(
+        {id:'1234567890123456', newFormat:1},
+        ['getRecordById'],
+        {method:'GET'}
+      )
+
+    it 'calls callback with response', ->
+      r = undefined
+      runs ->
+        leads.getRecordById('1234567890123456', (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
+
+  describe 'convertLead', ->
+    next = response = undefined
+    beforeEach ->
+      next = false
+      response = new Response()
+      spyOn(Request.prototype,'request').andCallFake( (cb) ->
+        setImmediate(cb,null,response)
+      )
+      spyOn(leads,'build').andReturn('<?xml version="1.0" encoding="UTF-8"?><Leads/>')
+      spyOn(leads,'buildUrl').andReturn({})
+    it 'requires lead_id param', ->
+      expect( () -> leads.convertLead() ).toThrow('Requires a Lead Id')
+
+    it 'requires options', ->
+      expect( () -> leads.convertLead('1234567890123456') ).toThrow('Requires an options')
+
+    it 'requires options.potential if options.createPotential true', ->
+      expect( () -> leads.convertLead('1234567890123456',{createPotential:true}) ).toThrow('Requires a potential')
+
+    it 'build Url', ->
+      leads.convertLead('1234567890123456',{},undefined)
+      expect(leads.buildUrl).toHaveBeenCalledWith(
+        {leadid:'1234567890123456', newFormat:1,xmlData:'<?xml version="1.0" encoding="UTF-8"?><Leads/>'},
+        ['convertLead'],
+        {method:'POST'}
+      )
+
+    it 'calls callback with response', ->
+      r = undefined
+      runs ->
+        leads.convertLead('1234567890123456', {}, (err,_r) ->
           r = _r
           next = true
         )

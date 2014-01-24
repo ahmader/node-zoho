@@ -25,11 +25,13 @@ class Leads extends BaseModule
     rows = []
     for record,index in records
       record_result = @buildRecord(record)
-      rows.push({
+      options = _.extend({type:'FL'},record._options)
+      row = {
         $:
           no: index + 1
-        FL: record_result
-      })
+      }
+      row[options.type] = record_result
+      rows.push(row)
     return rows
 
   build: (records) ->
@@ -67,13 +69,36 @@ class Leads extends BaseModule
   getMyRecords: ->
     throw new Error('Not Implemented')
 
-  getRecords:  ->
+  getRecords: (id) ->
     throw new Error('Not Implemented')
 
-  getRecordById: ->
-    throw new Error('Not Implemented')
+  getRecordById: (id, cb) ->
+    if not id
+      throw new Error('Requires an Id to fetch')
 
-  insertRecords: (records,cb) ->
+    query = {
+      id: id
+      newFormat: 1
+    }
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['getRecordById'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord(response.data)
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+    )
+
+  insertRecords: (records, cb) ->
     if not _.isArray(records)
       throw new Error('Requires array of records')
     if records.length < 1
@@ -87,9 +112,9 @@ class Leads extends BaseModule
       method: 'POST'
     }
     url = @buildUrl(query,['insertRecords'],options)
-    request = new Request(@,url)
+    request = new Request(@, url)
 
-    request.request((err,response) =>
+    request.request( (err,response) =>
       if err
         if _.isFunction(cb) then cb(err,null)
       else
@@ -110,8 +135,46 @@ class Leads extends BaseModule
   deleteRecords: ->
     throw new Error('Not Implemented')
 
-  convertLead: ->
-    throw new Error('Not Implemented')
+  convertLead: (lead_id, options, cb) ->
+    if not lead_id
+      throw new Error('Requires a Lead Id')
+    if not options
+      throw new Error('Requires an options')
+    defaults = {
+      createPotential: false,
+      assignTo: null,
+      notifyLeadOwner: true,
+      notifyNewEntityOwner: true
+    }
+    _.defaults(options,options)
+    records = [ _.pick(options,['createPotential','assignTo','notifyLeadOwner','notifyNewEntityOwner'])]
+
+    if options.createPotential == true and not _.isObject(options.potential)
+      throw new Error('Requires a potential')
+    else if options.createPotential == true
+      records.push(options.potential)
+
+
+    query = {
+      leadid: lead_id
+      newFormat: 1,
+      xmlData: @build(records)
+    }
+    options = {
+      method: 'POST'
+    }
+
+    url = @buildUrl(query,['convertLead'],options)
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord(response.data)
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+    )
 
   getRelatedRecords: ->
     throw new Error('Not Implemented')
