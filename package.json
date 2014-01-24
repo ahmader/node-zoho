@@ -1,6 +1,6 @@
 {
   "name": "node-zoho",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple Zoho integrations for Node.js",
   "keywords": [ "zoho" ],
   "main": "build/node-zoho",
@@ -30,7 +30,7 @@
     "grunt-contrib-watch": "~0.3.1"
   },
   "scripts": {
-    "prepublish": "coffee --bare --compile --output build lib/*.coffee"
+    "prepublish": "coffee --bare --compile --output build lib"
   }
 
 }
