@@ -32,7 +32,7 @@ describe 'leads', ->
 
     beforeEach ->
       spyOn(leads,'build').andReturn('<?xml version="1.0" encoding="UTF-8"?><Leads/>')
-      response = new Response()
+      response = new Response({})
       next = false
       spyOn(Request.prototype,'request').andCallFake( (cb) ->
         setImmediate(cb,null,response)
@@ -75,7 +75,7 @@ describe 'leads', ->
 
     beforeEach ->
       next = false
-      response = new Response()
+      response = new Response({})
       spyOn(leads,'buildUrl').andReturn({})
       spyOn(Request.prototype,'request').andCallFake( (cb) ->
         setImmediate(cb,null,response)
@@ -108,7 +108,7 @@ describe 'leads', ->
     next = response = undefined
     beforeEach ->
       next = false
-      response = new Response()
+      response = new Response({})
       spyOn(Request.prototype,'request').andCallFake( (cb) ->
         setImmediate(cb,null,response)
       )
