@@ -4,8 +4,6 @@ _ = require("underscore")
 async = require("async")
 xml2js = require("xml2js")
 
-helpers = require("./helpers")
-
 class Zoho
   authToken: null
 

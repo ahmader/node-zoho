@@ -1,5 +1,4 @@
 xml2js = require("xml2js")
-help = require("../../lib/helpers")
 zoho = require("../../lib/node-zoho")
 
 zohoApi = undefined
