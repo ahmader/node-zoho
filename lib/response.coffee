@@ -37,11 +37,14 @@ class Response
         if @data?.response?.error
           error = @data.response.error
 
-          if @error?.code
-            @code = @error.code
+          if _.isArray(error)
+            error = _.first(error)
 
-          if @error?.message
-            @message = @error.message
+          if error?.code
+            @code = error.code
+
+          if error?.message
+            @message = error.message
           else
             @message = "Unknown Error"
 
