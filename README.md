@@ -34,9 +34,9 @@ Currently a WIP, but feel free to ask how you can help.
 <tr>
   <td>convertLead</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>getRecordById</td>
