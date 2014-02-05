@@ -9,6 +9,84 @@ currently supports:
 
 Currently a WIP, but feel free to ask how you can help.
 
+## Product and Module Support
+
+### CRM
+
+<table>
+  <header>
+    <tr>
+      <th>Method</th>
+      <th>Leads</th>
+      <th>Accounts</th>
+      <th>Contacts</th>
+      <th>Potentials</th>
+    </tr>
+  </header>
+  <body>
+<tr>
+  <td>insertRecords</td><td>✓</td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>convertLead</td>✓<td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getRecordById</td>✓<td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getMyRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getCVRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>updateRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getSearchRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getSearchRecordsByPDC</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>deleteRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getRelatedRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getFields</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>updateRelatedRecords</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>getUsers</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>uploadFile</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>downloadFile</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>deleteFile</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>uploadPhoto</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>downloadPhoto</td><td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>deletePhoto</td><td><td></td><td></td><td></td>
+</tr>
+</body>
+</table>
+
 More to come...
 
 
