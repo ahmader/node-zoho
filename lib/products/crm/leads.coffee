@@ -93,8 +93,11 @@ class Leads extends BaseModule
       if err
         if _.isFunction(cb) then cb(err,null)
       else
-        processed = @processRecord(response.data)
-        response.data = processed
+        if response.data?.Leads
+          row = _.first(response.data?.Leads)
+          processed = @processRecord(_.first(row.row))
+          response.data = processed
+
         if _.isFunction(cb) then cb(null,response)
     )
 
