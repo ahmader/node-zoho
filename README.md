@@ -25,64 +25,144 @@ Currently a WIP, but feel free to ask how you can help.
   </header>
   <body>
 <tr>
-  <td>insertRecords</td><td>✓</td><td></td><td></td><td></td>
+  <td>insertRecords</td>
+  <td>✓</td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>convertLead</td>✓<td><td></td><td></td><td></td>
+  <td>convertLead</td>
+  <td>✓</td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getRecordById</td>✓<td><td></td><td></td><td></td>
+  <td>getRecordById</td>
+  <td>✓</td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getMyRecords</td><td><td></td><td></td><td></td>
+  <td>getMyRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getRecords</td><td><td></td><td></td><td></td>
+  <td>getRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getCVRecords</td><td><td></td><td></td><td></td>
+  <td>getCVRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>updateRecords</td><td><td></td><td></td><td></td>
+  <td>updateRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getSearchRecords</td><td><td></td><td></td><td></td>
+  <td>getSearchRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getSearchRecordsByPDC</td><td><td></td><td></td><td></td>
+  <td>getSearchRecordsByPDC</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>deleteRecords</td><td><td></td><td></td><td></td>
+  <td>deleteRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getRelatedRecords</td><td><td></td><td></td><td></td>
+  <td>getRelatedRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getFields</td><td><td></td><td></td><td></td>
+  <td>getFields</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>updateRelatedRecords</td><td><td></td><td></td><td></td>
+  <td>updateRelatedRecords</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>getUsers</td><td><td></td><td></td><td></td>
+  <td>getUsers</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>uploadFile</td><td><td></td><td></td><td></td>
+  <td>uploadFile</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>downloadFile</td><td><td></td><td></td><td></td>
+  <td>downloadFile</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>deleteFile</td><td><td></td><td></td><td></td>
+  <td>deleteFile</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>uploadPhoto</td><td><td></td><td></td><td></td>
+  <td>uploadPhoto</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>downloadPhoto</td><td><td></td><td></td><td></td>
+  <td>downloadPhoto</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-  <td>deletePhoto</td><td><td></td><td></td><td></td>
+  <td>deletePhoto</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
 </tr>
 </body>
 </table>
