@@ -57,12 +57,24 @@ class Leads extends BaseModule
       for i,r of record
         _.extend(result, @processRecord(r))
     else if _.isObject(record)
-      for k,v of record
-        if k is 'FL'
-          for i,fl of v
-            if fl?.$?.val and fl?._
-              result[fl.$.val] = fl._
-
+      if _.has(record,'FL')
+        for k,v of record
+          if k is 'FL'
+            for i,fl of v
+              if fl?.$?.val and fl?._
+                result[fl.$.val] = fl._
+      else if _.has(record,'success')
+        record = record.success
+        for k,v of record
+          if k is 'Contact' or k is 'Potential'
+            result[k] = {}
+            _.each(v, (_v) =>
+              _.extend(result[k],@processRecord(_v))
+            )
+      else if _.has(record,'_') and _.has(record,'$') and _.has(record.$,'param')
+        result[record.$.param] = record._
+      else if _.has(record,'_') and _.has(record,'$') and _.has(record.$,'val')
+        result[record.$.val] = record._
 
     return result
 
@@ -159,7 +171,7 @@ class Leads extends BaseModule
 
 
     query = {
-      leadid: lead_id
+      leadId: lead_id
       newFormat: 1,
       xmlData: @build(records)
     }

@@ -126,7 +126,7 @@ describe 'leads', ->
     it 'build Url', ->
       leads.convertLead('1234567890123456',{},undefined)
       expect(leads.buildUrl).toHaveBeenCalledWith(
-        {leadid:'1234567890123456', newFormat:1,xmlData:'<?xml version="1.0" encoding="UTF-8"?><Leads/>'},
+        {leadId:'1234567890123456', newFormat:1,xmlData:'<?xml version="1.0" encoding="UTF-8"?><Leads/>'},
         ['convertLead'],
         {method:'POST'}
       )
@@ -211,21 +211,47 @@ describe 'leads', ->
       expect(result[0].FL).toEqual(_record)
 
   describe 'processRecord', ->
-    compiled_record = undefined
 
-    beforeEach ->
-      compiled_record = leads.buildRecord(record)
+    describe "single FL response", ->
+      compiled_record = undefined
 
-    it 'handles FL array', ->
-      compiled_record = { FL: [ {$:{val:"test"},_:"value"}]}
-      processed = leads.processRecord(compiled_record)
-      expect(processed).toEqual({test:"value"})
+      beforeEach ->
+        compiled_record = leads.buildRecord(record)
 
-    it 'handles complicated response', ->
-      compiled_record = [{"FL":[{"_":"953419000000673233","$":{"val":"Id"}},{"_":"2014-01-23 14:55:23","$":{"val":"Created Time"}},{"_":"2014-01-23 14:55:23","$":{"val":"Modified Time"}},{"_":"Parmar","$":{"val":"Created By"}},{"_":"Parmar","$":{"val":"Modified By"}}]}]
-      processed = leads.processRecord(compiled_record)
-      expect(processed).toEqual({ Id : '953419000000673233', "Created Time" : '2014-01-23 14:55:23', "Modified Time" : '2014-01-23 14:55:23', "Created By" : 'Parmar', "Modified By" : 'Parmar' })
+      it 'handles FL array', ->
+        compiled_record = { FL: [ {$:{val:"test"},_:"value"}]}
+        processed = leads.processRecord(compiled_record)
+        expect(processed).toEqual({test:"value"})
 
+      it 'handles complicated response', ->
+        compiled_record = [{"FL":[{"_":"953419000000673233","$":{"val":"Id"}},{"_":"2014-01-23 14:55:23","$":{"val":"Created Time"}},{"_":"2014-01-23 14:55:23","$":{"val":"Modified Time"}},{"_":"Parmar","$":{"val":"Created By"}},{"_":"Parmar","$":{"val":"Modified By"}}]}]
+        processed = leads.processRecord(compiled_record)
+        expect(processed).toEqual({ Id : '953419000000673233', "Created Time" : '2014-01-23 14:55:23', "Modified Time" : '2014-01-23 14:55:23', "Created By" : 'Parmar', "Modified By" : 'Parmar' })
+
+
+    describe "param labeled row", ->
+
+      it "returns single object with key and value", ->
+        expect(leads.processRecord({_:"value",$:{param:"key"}})).toEqual({key:"value"})
+
+    describe "val labeled row", ->
+
+      it "returns single object with key and value", ->
+        expect(leads.processRecord({_:"value",$:{val:"key"}})).toEqual({key:"value"})
+
+    describe "simple success", ->
+      # <success><Contact param="id">1071983000000078003</Contact></success>
+      single_response = {"success":{"Contact":[{"_":"1071983000000075005","$":{"param":"id"}}]}}
+      multiple_response = {"success":{"Contact":[{"_":"1071983000000075009","$":{"param":"id"}}],
+      "Potential":[{"_":"1071983000000075011","$":{"param":"id"}}]}}
+
+      it "single response", ->
+        processed = leads.processRecord(single_response)
+        expect(processed).toEqual({Contact: {id:'1071983000000075005'}})
+
+      it "multiple response", ->
+        processed = leads.processRecord(multiple_response)
+        expect(processed).toEqual({Contact: {id:'1071983000000075009'},Potential: {id:'1071983000000075011'}})
 
 
 
