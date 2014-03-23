@@ -105,7 +105,7 @@ class Leads extends BaseModule
           for row of _data.Leads[0].row
             processed = @processRecord(_data.Leads[0].row[row])
             if processed
-              response.data = processed
+              response.data.push(processed)
 
 
         if _.isFunction(cb) then cb(null,response)
