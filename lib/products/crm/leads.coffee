@@ -81,8 +81,36 @@ class Leads extends BaseModule
   getMyRecords: ->
     throw new Error('Not Implemented')
 
-  getRecords: (id) ->
-    throw new Error('Not Implemented')
+  getRecords: (id, cb) ->
+    query = {
+      newFormat: 1
+    }
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['getRecords'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        _data = response.data
+        response.data = Array()
+
+        if _data?.Leads
+          for row of _data.Leads[0].row
+            processed = @processRecord(_data.Leads[0].row[row])
+            if processed
+              response.data = processed
+
+
+        if _.isFunction(cb) then cb(null,response)
+    )
+
 
   getRecordById: (id, cb) ->
     if not id
