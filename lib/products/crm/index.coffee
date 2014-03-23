@@ -4,7 +4,7 @@ class CrmProduct extends BaseProduct
   name: 'crm'
 
   getModules: ->
-    return ['Leads']
+    return ['Leads', 'Events']
 
   getModule: (module_name) ->
     try

@@ -21,6 +21,7 @@ Currently a WIP, but feel free to ask how you can help.
       <th>Accounts</th>
       <th>Contacts</th>
       <th>Potentials</th>
+      <th>Events</th>
     </tr>
   </header>
   <body>
@@ -30,10 +31,12 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>convertLead</td>
   <td>✓</td>
+  <td>NA</td>
   <td>NA</td>
   <td>NA</td>
   <td>NA</td>
@@ -44,9 +47,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>getMyRecords</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -58,9 +63,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>getCVRecords</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -72,9 +79,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>getSearchRecords</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -86,9 +95,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>deleteRecords</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -100,9 +111,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>getFields</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -114,9 +127,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>getUsers</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -128,9 +143,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>downloadFile</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -142,9 +159,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>uploadPhoto</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -156,9 +175,11 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td></td>
 </tr>
 <tr>
   <td>deletePhoto</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
