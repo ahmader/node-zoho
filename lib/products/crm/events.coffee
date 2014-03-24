@@ -4,8 +4,8 @@ xml2js = require("xml2js")
 BaseModule = require('../../base-module')
 Request = require('../../request')
 
-class Leads extends BaseModule
-  name: 'Leads'
+class Events extends BaseModule
+  name: 'Events'
 
   buildRecord: (record) ->
     if not _.isObject(record)
@@ -101,9 +101,9 @@ class Leads extends BaseModule
         _data = response.data
         response.data = Array()
 
-        if _data?.Leads
-          for row of _data.Leads[0].row
-            processed = @processRecord(_data.Leads[0].row[row])
+        if _data?.Events
+          for row of _data.Events[0].row
+            processed = @processRecord(_data.Events[0].row[row])
             if processed
               response.data.push(processed)
 
@@ -133,8 +133,8 @@ class Leads extends BaseModule
       if err
         if _.isFunction(cb) then cb(err,null)
       else
-        if response.data?.Leads
-          row = _.first(response.data?.Leads)
+        if response.data?.Events
+          row = _.first(response.data?.Events)
           processed = @processRecord(_.first(row.row))
           response.data = processed
 
@@ -249,4 +249,4 @@ class Leads extends BaseModule
   deletePhoto:  ->
     throw new Error('Not Implemented')
 
-module.exports = Leads
+module.exports = Events
