@@ -1,4 +1,3 @@
-help = require("../../lib/helpers")
 zoho = require("../../lib/node-zoho")
 config = require('../config.json')
 
@@ -34,9 +33,75 @@ if config.authToken and config.enabled
         return done
 
       runs ->
-        console.log(response.data)
         expect(errors).toBe(null)
         expect(response).toBeDefined()
 
         # expect(results.isError()).toBeFalsy()
+        #
+
+    describe "events", ->
+      event =
+        "Subject": "Conference"
+        "Start DateTime": "2014-01-01 12:30:00"
+        "End DateTime": "2014-01-01 12:30:00"
+        "Venue": "Mystery Theater"
+        "Send Notification Email": "False"
+
+      it "can create event", ->
+        runs ->
+          za.execute('crm','Events','insertRecords',[event], (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          event_id = response.data.Id
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
+
+      it "can get event by id", ->
+        runs ->
+          za.execute('crm','Events','insertRecords',[event], (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          done = false
+          za.execute('crm','Events','getRecordById',response.data.Id, (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
+
+      it "can fetch all events", ->
+        runs ->
+          za.execute('crm','Events','getRecords',{}, (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
+          expect(response.data).toEqual(jasmine.any(Array))
 
