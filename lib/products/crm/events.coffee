@@ -81,10 +81,10 @@ class Events extends BaseModule
   getMyRecords: ->
     throw new Error('Not Implemented')
 
-  getRecords: (id, cb) ->
-    query = {
+  getRecords: (_query, cb) ->
+    query = _.extend({
       newFormat: 1
-    }
+    },_query);
 
     options = {
       method: 'GET'
