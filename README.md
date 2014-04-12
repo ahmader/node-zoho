@@ -222,3 +222,4 @@ zoho.execute('crm', 'Leads', 'insertRecords', records, function (err, result) {
 All the code is coffescript, but we deploy compiled js to npm. If you want to help, checkout the git repo and submit a PR.
 
 [![NPM](https://nodei.co/npm/node-zoho.png?downloads=true)](https://nodei.co/npm/node-zoho/)
+[Zoho CRM API](http://www.zoho.com/crm/help/api/api-methods.html)
