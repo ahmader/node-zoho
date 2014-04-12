@@ -20,11 +20,11 @@
     "url": "git://github.com/picatic/node-zoho.git"
   },
   "dependencies": {
-    "xml2js": "0.4.1",
-    "coffee-script": "~1.6.3",
-    "underscore": "~1.5.2",
+    "xml2js": "0.4.2",
+    "coffee-script": "~1.7.1",
+    "underscore": "~1.6.0",
     "async": "~0.2.9",
-    "request": "~2.33.0"
+    "request": "~2.34.0"
   },
   "devDependencies": {
     "grunt": "0.4.2",
