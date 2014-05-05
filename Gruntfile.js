@@ -37,12 +37,26 @@ module.exports = function(grunt) {
           src: ['spec/**/*.coffee']
         }
       }
+    },
+    bump: {
+      files: ['package.json'],
+      updateConfigs: [],
+      commit: true,
+      commitMessage: 'Release v%VERSION%',
+      commitFiles: ['package.json'], // '-a' for all files
+      createTag: true,
+      tagName: 'v%VERSION%',
+      tagMessage: 'Version %VERSION%',
+      push: false,
+      // pushTo: 'origin',
+      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
     }
   });
 
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jasmine-bundle');
+  grunt.loadNpmTasks('grunt-bump');
 
   grunt.registerTask('default', ['coffeelint', 'spec:unit'] );
   grunt.registerTask('integration', ['coffeelint', 'spec:integration']);
