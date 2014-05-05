@@ -2,7 +2,7 @@ _ = require('underscore')
 
 
 Events = require('../../../lib/products/crm/events')
-BaseModule = require('../../../lib/base-module')
+CrmModule = require('../../../lib/products/crm/crm-module')
 CrmProduct = require('../../../lib/products/crm')
 Request = require('../../../lib/request')
 Response = require('../../../lib/response')
@@ -21,8 +21,8 @@ describe 'events', ->
       "Email": "test@testerson.com"
     }
 
-  it 'extends BaseModule', ->
-    expect(Events.__super__.constructor).toEqual(BaseModule)
+  it 'extends CrmModule', ->
+    expect(Events.__super__.constructor).toEqual(CrmModule)
 
   it 'has name Events', ->
     expect(events.name).toEqual('Events')

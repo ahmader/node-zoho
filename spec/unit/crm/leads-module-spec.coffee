@@ -2,7 +2,7 @@ _ = require('underscore')
 
 
 Leads = require('../../../lib/products/crm/leads')
-BaseModule = require('../../../lib/base-module')
+CrmModule = require('../../../lib/products/crm/crm-module')
 CrmProduct = require('../../../lib/products/crm')
 Request = require('../../../lib/request')
 Response = require('../../../lib/response')
@@ -22,7 +22,7 @@ describe 'leads', ->
     }
 
   it 'extends BaseModule', ->
-    expect(Leads.__super__.constructor).toEqual(BaseModule)
+    expect(Leads.__super__.constructor).toEqual(CrmModule)
 
   it 'has name Leads', ->
     expect(leads.name).toEqual('Leads')
