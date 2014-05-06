@@ -1,10 +1,10 @@
-[![Stories in Ready](https://badge.waffle.io/picatic/node-zoho.png?label=ready&title=Ready)](https://waffle.io/picatic/node-zoho)
+
 Zoho CRM rest api wrapper for node.js
 
 [![Build Status](https://travis-ci.org/picatic/node-zoho.png?branch=master)](https://travis-ci.org/picatic/node-zoho)
 [![NPM version](https://badge.fury.io/js/node-zoho.png)](http://badge.fury.io/js/node-zoho)
 [![Code Climate](https://codeclimate.com/github/picatic/node-zoho.png)](https://codeclimate.com/github/picatic/node-zoho)
-
+[![Stories in Ready](https://badge.waffle.io/picatic/node-zoho.png?label=ready&title=Ready)](https://waffle.io/picatic/node-zoho)
 currently supports:
  - authentication
  - insertingRecord on all resources
