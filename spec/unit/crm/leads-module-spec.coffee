@@ -66,6 +66,46 @@ describe 'leads', ->
       runs ->
         expect(r).toEqual(response)
 
+  describe 'uploadFile', ->
+    fakeForm = fakeFile = fakeDescriptor = response = undefined
+
+    beforeEach ->
+      fakeForm = {append: ->}
+      fakeFile = {}
+      fakeDescriptor = {}
+      response = {a: 1}
+
+      spyOn(leads,'buildUrl').andReturn({})
+      spyOn(Request.prototype, 'request').andCallFake( (cb) ->
+        setImmediate(cb, null, response)
+
+        {form: -> fakeForm}
+      )
+
+    it 'builds correct url', ->
+      leads.uploadFile '1234567890123456', fakeFile, fakeDescriptor
+
+      expect(leads.buildUrl).toHaveBeenCalledWith {}, ['uploadFile'], {method: 'POST'}
+
+    it 'appends data into multipart request', ->
+      spy = spyOn fakeForm, 'append'
+
+      leads.uploadFile '1234567890123456', fakeFile, fakeDescriptor
+
+      expect(spy).toHaveBeenCalledWith 'id', '1234567890123456'
+      expect(spy).toHaveBeenCalledWith 'content', fakeFile, fakeDescriptor
+
+    it 'calls callback with response', ->
+      spy = jasmine.createSpy('callback')
+
+      leads.uploadFile '1234567890123456', fakeFile, fakeDescriptor, spy
+
+      waitsFor ->
+        if (spy.callCount == 1)
+          expect(spy).toHaveBeenCalledWith(null, {a: 1, data: {}})
+
+          true
+
 
 
 
