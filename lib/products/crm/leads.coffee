@@ -75,8 +75,26 @@ class Leads extends CrmModule
   getUsers: ->
     throw new Error('Not Implemented')
 
-  uploadFile: ->
-    throw new Error('Not Implemented')
+  uploadFile: (lead_id, istream, cb) ->
+    query = {}
+    options = {method: 'POST'}
+
+    url = @buildUrl query, ['uploadFile'], options
+    request = new Request(@, url)
+
+    r = request.request (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord(response.data)
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+
+    form = r.form()
+    form.append('id', lead_id)
+    form.append('content', istream)
+
+    return r
 
   downloadFile: ->
     throw new Error('Not Implemented')
