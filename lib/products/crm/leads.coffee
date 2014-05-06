@@ -75,7 +75,7 @@ class Leads extends CrmModule
   getUsers: ->
     throw new Error('Not Implemented')
 
-  uploadFile: (lead_id, istream, cb) ->
+  uploadFile: (lead_id, file, descriptor, cb) ->
     query = {}
     options = {method: 'POST'}
 
@@ -92,7 +92,7 @@ class Leads extends CrmModule
 
     form = r.form()
     form.append('id', lead_id)
-    form.append('content', istream)
+    form.append('content', file, descriptor)
 
     return r
 
