@@ -11,11 +11,19 @@ class CrmModule extends BaseModule
       throw new Error('Object required')
     result = []
     for k, v of record
-      result.push({
-        $:
-          val: k
-        _: v
-      })
+      if Array.isArray v
+        # FIXME: tbd how to pass nested tag name, currently hardcoded to "project"
+        result.push({
+          $:
+            val: k
+          product: @buildRecords v
+        })
+      else
+        result.push({
+          $:
+            val: k
+          _: v
+        })
     return result
 
   build: (records) ->
