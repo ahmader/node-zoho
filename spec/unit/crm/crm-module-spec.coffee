@@ -59,6 +59,22 @@ describe 'crm module', ->
       expect(result.length).toEqual(1)
       expect(result[0]._).toEqual('value')
 
+    it 'supports nested records', ->
+      result = crmModule.build [
+        "Subject": "Test",
+        "Account Name": "phone account11 9pm",
+        "Product Details": [
+          "Product Id": "269840000000136287",
+          "Product Name": "prd1"
+        ]
+      ]
+      expect(result).toMatch(/\?xml/)
+      expect(result).toContain('<row no="1"')
+      expect(result).toContain('<FL val="Subject">Test</FL><FL val="Account Name">phone account11 9pm</FL>')
+      expect(result).toContain('<FL val="Product Details"><product no="1">')
+      expect(result).toContain('<FL val="Product Id">269840000000136287</FL><FL val="Product Name">prd1</FL>')
+
+
   describe 'buildRecords', ->
     record_set = undefined
 
