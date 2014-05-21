@@ -244,5 +244,11 @@ zoho.execute('crm', 'Leads', 'insertRecords', records, function (err, result) {
 
 All the code is coffescript, but we deploy compiled js to npm. If you want to help, checkout the git repo and submit a PR.
 
+# Release instructions
+
+1. Wait for TravisCI confirmation that latest merge passes tests.
+2. Run `grunt bump`. This bumps the package.json version, tags this version and pushes it.
+3. `npm publish` will compile the CoffeeScript and push the latest version to npmjs.org
+
 [![NPM](https://nodei.co/npm/node-zoho.png?downloads=true)](https://nodei.co/npm/node-zoho/)
 [Zoho CRM API](http://www.zoho.com/crm/help/api/api-methods.html)
