@@ -105,3 +105,24 @@ if config.authToken and config.enabled
           expect(response).toBeDefined()
           expect(response.data).toEqual(jasmine.any(Array))
 
+    describe "contacts", ->
+      contact =
+        "First Name"  : "Test"
+        "Last Name"   : "Testerson"
+        "Email"       : "test@testerson.com"
+
+      it "can create contact", ->
+        runs ->
+          za.execute('crm','Contacts','insertRecords',[contact], (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          contact_id = response.data.Id
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
