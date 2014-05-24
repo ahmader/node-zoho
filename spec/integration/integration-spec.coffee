@@ -126,3 +126,26 @@ if config.authToken and config.enabled
           contact_id = response.data.Id
           expect(errors).toBe(null)
           expect(response).toBeDefined()
+
+    describe "products", ->
+      product =
+        "Product Name"  : "TestProduct"
+        "Unit Price"    : "15"
+        "Tax"           : "2"
+
+      it "can create contact", ->
+        runs ->
+          za.execute('crm','Products','insertRecords',[product], (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          product_id = response.data.Id
+          expect(product_id).toBeDefined()
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
