@@ -13,9 +13,6 @@ class Products extends CrmModule
   getRecords: (_query, cb) ->
     throw new Error('Not Implemented')
 
-  getRecordById: (id, cb) ->
-    throw new Error('Not Implemented')
-
   updateRecords: ->
     throw new Error('Not Implemented')
 
