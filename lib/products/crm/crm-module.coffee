@@ -200,7 +200,8 @@ class CrmModule extends BaseModule
 
   getSearchRecordsByPDC: (_query, cb) ->
     query = _.extend({
-      newFormat: 1
+      newFormat: 1,
+      selectColumns: 'All'
     }, _query)
 
     options = {
