@@ -274,7 +274,8 @@ CrmModule = (function(_super) {
   CrmModule.prototype.getSearchRecordsByPDC = function(_query, cb) {
     var options, query, request, url;
     query = _.extend({
-      newFormat: 1
+      newFormat: 1,
+      selectColumns: 'All'
     }, _query);
     options = {
       method: 'GET'
