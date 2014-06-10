@@ -198,4 +198,33 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
+  getSearchRecordsByPDC: (_query, cb) ->
+    query = _.extend({
+      newFormat: 1
+    }, _query)
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['getSearchRecordsByPDC'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        _data = response.data
+        response.data = Array()
+
+        if _data?[@name]
+          for row of _data[@name][0].row
+            processed = @processRecord(_data[@name][0].row[row])
+            if processed
+              response.data.push(processed)
+
+        if _.isFunction(cb) then cb(null,response)
+    )
+
 module.exports = CrmModule
