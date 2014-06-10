@@ -36,10 +36,6 @@ Vendors = (function(_super) {
     throw new Error('Not Implemented');
   };
 
-  Vendors.prototype.getSearchRecordsByPDC = function() {
-    throw new Error('Not Implemented');
-  };
-
   Vendors.prototype.getRelatedRecords = function() {
     throw new Error('Not Implemented');
   };

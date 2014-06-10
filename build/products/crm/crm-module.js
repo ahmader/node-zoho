@@ -271,6 +271,42 @@ CrmModule = (function(_super) {
     })(this));
   };
 
+  CrmModule.prototype.getSearchRecordsByPDC = function(_query, cb) {
+    var options, query, request, url;
+    query = _.extend({
+      newFormat: 1
+    }, _query);
+    options = {
+      method: 'GET'
+    };
+    url = this.buildUrl(query, ['getSearchRecordsByPDC'], options);
+    request = new Request(this, url);
+    return request.request((function(_this) {
+      return function(err, response) {
+        var processed, row, _data;
+        if (err) {
+          if (_.isFunction(cb)) {
+            return cb(err, null);
+          }
+        } else {
+          _data = response.data;
+          response.data = Array();
+          if (_data != null ? _data[_this.name] : void 0) {
+            for (row in _data[_this.name][0].row) {
+              processed = _this.processRecord(_data[_this.name][0].row[row]);
+              if (processed) {
+                response.data.push(processed);
+              }
+            }
+          }
+          if (_.isFunction(cb)) {
+            return cb(null, response);
+          }
+        }
+      };
+    })(this));
+  };
+
   return CrmModule;
 
 })(BaseModule);
