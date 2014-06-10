@@ -169,4 +169,33 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
+  deleteRecords: (id, cb) ->
+    if not id
+      throw new Error('Requires an Id to delete')
+
+    query = {
+      id: id
+      newFormat: 1
+    }
+
+    options = {
+      method: 'POST'
+    }
+
+    url = @buildUrl(query,['deleteRecords'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        if response.data?.Events
+          row = _.first(response.data?.Events)
+          processed = @processRecord(_.first(row.row))
+          response.data = processed
+
+        if _.isFunction(cb) then cb(null,response)
+    )
+
 module.exports = CrmModule
