@@ -4,8 +4,8 @@ xml2js = require("xml2js")
 CrmModule = require('./crm-module')
 Request = require('../../request')
 
-class SalesOrders extends CrmModule
-  name: 'SalesOrders'
+class Products extends CrmModule
+  name: 'Products'
 
   getMyRecords: ->
     throw new Error('Not Implemented')
@@ -55,4 +55,4 @@ class SalesOrders extends CrmModule
   deletePhoto:  ->
     throw new Error('Not Implemented')
 
-module.exports = SalesOrders
+module.exports = Products
