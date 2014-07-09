@@ -63,9 +63,6 @@ class Events extends CrmModule
   getRelatedRecords: ->
     throw new Error('Not Implemented')
 
-  getFields: ->
-    throw new Error('Not Implemented')
-
   updateRelatedRecords: ->
     throw new Error('Not Implemented')
 

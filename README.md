@@ -130,11 +130,11 @@ Currently a WIP, but feel free to ask how you can help.
 </tr>
 <tr>
   <td>getFields</td>
+  <td>✓</td>
   <td></td>
   <td></td>
   <td></td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
   <td></td>
 </tr>
 <tr>

@@ -85,6 +85,47 @@ class CrmModule extends BaseModule
 
     return result
 
+  processFields: (record) ->
+    result = {}
+    if _.isObject(record)
+      if _.has(record,'FL')
+        result = record.$
+        result.fields = [];
+        for i,fl of record.FL
+          result.fields.push(fl.$)
+
+    return result
+
+  getFields: (_query, cb) ->
+    query = _.extend({
+      newFormat: 1
+    }, _query)
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['getFields'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        _data = response.data
+        response.data = Array()
+
+        if _data?[@name]
+          for row of _data[@name].section
+            processed = @processFields(_data[@name].section[row])
+            if processed
+              response.data.push(processed)
+
+
+        if _.isFunction(cb) then cb(null,response)
+    )
+
   getRecords: (_query, cb) ->
     query = _.extend({
       newFormat: 1
