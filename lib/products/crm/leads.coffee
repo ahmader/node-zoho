@@ -10,9 +10,6 @@ class Leads extends CrmModule
   getMyRecords: ->
     throw new Error('Not Implemented')
 
-  updateRecords: ->
-    throw new Error('Not Implemented')
-
   getSearchRecords: ->
     throw new Error('Not Implemented')
 
@@ -64,9 +61,6 @@ class Leads extends CrmModule
     )
 
   getRelatedRecords: ->
-    throw new Error('Not Implemented')
-
-  getFields: ->
     throw new Error('Not Implemented')
 
   updateRelatedRecords: ->
