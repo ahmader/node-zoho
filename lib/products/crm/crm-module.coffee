@@ -92,7 +92,18 @@ class CrmModule extends BaseModule
         result = record.$
         result.fields = [];
         for i,fl of record.FL
-          result.fields.push(fl.$)
+          field = fl.$
+          if _.has(fl,'val')
+            _val = fl.val;
+            field.val = [];
+            for c,val of _val
+              if _.has(val,'_')
+                if _.has(val,'$')
+                  if val['$'].default then field.default = val['_'];
+                field.val.push(val['_']);
+              else
+                field.val.push(val);
+          result.fields.push(field)
 
     return result
 
