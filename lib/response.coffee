@@ -48,7 +48,27 @@ class Response
           else
             @message = "Unknown Error"
 
-          return cb(new Error(@message),@)
+          return cb({code: @code, message: @message}, @);
+
+        else if @data?.response?.nodata
+          error = @data.response.nodata
+
+          if _.isArray(error)
+            error = _.first(error)
+
+          if error?.code
+            @code = error.code
+            if _.isArray(@code)
+              @code = _.first(@code)
+
+          if error?.message
+            @message = error.message
+            if _.isArray(@message)
+              @message = _.first(@message)
+          else
+            @message = "Unknown Error"
+
+          return cb(null,@)
 
         else
 
