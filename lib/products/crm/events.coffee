@@ -10,9 +10,6 @@ class Events extends CrmModule
   getMyRecords: ->
     throw new Error('Not Implemented')
 
-  getSearchRecords: ->
-    throw new Error('Not Implemented')
-
   getSearchRecordsByPDC: ->
     throw new Error('Not Implemented')
 

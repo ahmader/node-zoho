@@ -223,3 +223,40 @@ describe 'crm module', ->
         return next
       runs ->
         expect(r).toEqual(response)
+
+  describe 'getSearchRecords', ->
+    next = response = undefined
+
+    beforeEach ->
+      next = false
+      response = new Response({})
+      spyOn(crmModule,'buildUrl').andReturn({})
+      spyOn(Request.prototype,'request').andCallFake( (cb) ->
+        setImmediate(cb,null,response)
+      )
+
+    it 'requires query object', ->
+      expect( () -> crmModule.getSearchRecords() ).toThrow('Requires a query object')
+
+    it 'requires searchCondition object', ->
+      expect( () -> crmModule.getSearchRecords({}) ).toThrow('Requires a searchCondition to fetch')
+
+    it 'build Url', ->
+      crmModule.getSearchRecords({searchCondition: '(Start DateTime|starts with|2014-09-22)', selectColumns : 'All'},undefined)
+      expect(crmModule.buildUrl).toHaveBeenCalledWith(
+        {searchCondition: '(Start DateTime|starts with|2014-09-22)', selectColumns : 'All', newFormat:1},
+        ['getSearchRecords'],
+        {method:'GET'}
+      )
+
+    it 'calls callback with response', ->
+      r = undefined
+      runs ->
+        crmModule.getSearchRecords({searchCondition: '(Start DateTime|starts with|2014-09-22)'}, (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
