@@ -7,17 +7,19 @@
   ],
   "main": "build/node-zoho",
   "private": false,
-  "homepage": "https://github.com/picatic/node-zoho",
-  "bugs": "https://github.com/picatic/node-zoho/issues",
+  "homepage": "https://github.com/ahmader/node-zoho",
+  "bugs": "https://github.com/ahmader/node-zoho/issues",
   "license": "MIT",
-  "author": "Picatic E-Tickets Inc. <api@picatic.com>",
-  "contributors": [],
+  "author": "Ahmader <ahmader@amozun.com>",
+  "contributors": [
+    "Picatic E-Tickets Inc. <api@picatic.com>"
+  ],
   "engines": {
     "node": ">=0.10.0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/picatic/node-zoho.git"
+    "url": "git://github.com/ahmader/node-zoho.git"
   },
   "dependencies": {
     "xml2js": "0.4.2",
