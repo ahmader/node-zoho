@@ -68,8 +68,8 @@ Currently a WIP, but feel free to ask how you can help.
 <tr>
   <td>getRecords</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
@@ -131,8 +131,8 @@ Currently a WIP, but feel free to ask how you can help.
 <tr>
   <td>getFields</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
   <td>✓</td>
   <td>✓</td>
   <td></td>

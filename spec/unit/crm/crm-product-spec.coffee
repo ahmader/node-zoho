@@ -20,7 +20,7 @@ describe 'crm', ->
       expect(Crm.getModules()).toBeDefined()
 
     it 'contains implemented modules', ->
-      expect(Crm.getModules()).toEqual(['Leads', 'Events', 'Potentials'])
+      expect(Crm.getModules()).toEqual(['Leads', 'Events', 'Potentials', 'Contacts', 'Accounts'])
 
   describe 'getModule', ->
 
