@@ -19,10 +19,10 @@ class Request
     options = _.pick(@_request,['method'])
     options.uri = url.format(@_request)
     request(options, (error, response, body) =>
-      @response = new Response(response)
       if error
         cb(error,null)
       else
+        @response = new Response(response)
         @response.parseBody(body,cb)
     )
 

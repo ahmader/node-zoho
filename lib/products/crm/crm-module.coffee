@@ -19,6 +19,8 @@ class CrmModule extends BaseModule
           product: @buildRecords v
         })
       else
+        if typeof v=='undefined'
+         v = ''
         result.push({
           $:
             val: k
