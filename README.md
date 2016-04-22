@@ -93,6 +93,15 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
 </tr>
 <tr>
+  <td>searchRecords</td>
+  <td>✓</td>
+  <td></td>
+  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td></td>
+</tr>
+<tr>
   <td>getSearchRecords</td>
   <td>✓</td>
   <td></td>

@@ -235,6 +235,43 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
+  searchRecords: (_query, cb) ->
+    if not _.isObject(_query)
+      throw new Error('Requires a query object')
+
+    query = _.extend({
+      newFormat: 1,
+      selectColumns: 'All'
+    }, _query)
+
+    if not query.criteria
+      throw new Error('Requires a criteria to fetch')
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['searchRecords'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        _data = response.data
+        response.data = Array()
+
+        if _data?[@name]
+          for row of _data[@name][0].row
+            processed = @processRecord(_data[@name][0].row[row])
+            if processed
+              response.data.push(processed)
+
+
+        if _.isFunction(cb) then cb(null,response)
+    )
+
   insertRecords: (records, cb) ->
     if not _.isArray(records)
       throw new Error('Requires array of records')

@@ -260,3 +260,40 @@ describe 'crm module', ->
         return next
       runs ->
         expect(r).toEqual(response)
+
+  describe 'searchRecords', ->
+    next = response = undefined
+
+    beforeEach ->
+      next = false
+      response = new Response({})
+      spyOn(crmModule,'buildUrl').andReturn({})
+      spyOn(Request.prototype,'request').andCallFake( (cb) ->
+        setImmediate(cb,null,response)
+      )
+
+    it 'requires query object', ->
+      expect( () -> crmModule.searchRecords() ).toThrow('Requires a query object')
+
+    it 'requires criteria object', ->
+      expect( () -> crmModule.searchRecords({}) ).toThrow('Requires a criteria to fetch')
+
+    it 'build Url', ->
+      crmModule.searchRecords({criteria: '(Start DateTime:2014-09-22)', selectColumns : 'All'},undefined)
+      expect(crmModule.buildUrl).toHaveBeenCalledWith(
+        {criteria: '(Start DateTime:2014-09-22)', selectColumns : 'All', newFormat:1},
+        ['searchRecords'],
+        {method:'GET'}
+      )
+
+    it 'calls callback with response', ->
+      r = undefined
+      runs ->
+        crmModule.searchRecords({criteria: '(Start DateTime|starts with|2014-09-22)'}, (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
