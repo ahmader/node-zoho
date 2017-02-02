@@ -190,8 +190,8 @@ class CrmModule extends BaseModule
       if err
         if _.isFunction(cb) then cb(err,null)
       else
-        if response.data?.Events
-          row = _.first(response.data?.Events)
+        if response.data?[_this.name]
+          row = _.first(response.data?[_this.name])
           processed = @processRecord(_.first(row.row))
           response.data = processed
 
