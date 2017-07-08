@@ -279,13 +279,15 @@ class CrmModule extends BaseModule
       throw new Error('Requires as least one record')
 
     query = {
-      newFormat: 1,
-      xmlData: @build(records)
+      newFormat: 1
     }
     options = {
       method: 'POST'
     }
     url = @buildUrl(query,['insertRecords'],options)
+    url.form = {
+      xmlData: @build(records)
+    };
     request = new Request(@, url)
 
     request.request( (err,response) =>
@@ -305,13 +307,15 @@ class CrmModule extends BaseModule
 
     query = {
       newFormat: 1,
-      id: id,
-      xmlData: @build(records)
+      id: id
     }
     options = {
       method: 'POST'
     }
     url = @buildUrl(query,['updateRecords'],options)
+    url.form = {
+      xmlData: @build(records)
+    };
     request = new Request(@, url)
 
     request.request( (err,response) =>

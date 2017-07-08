@@ -16,7 +16,7 @@ class Request
     return
 
   request: (cb) ->
-    options = _.pick(@_request,['method'])
+    options = _.pick(@_request,['method', 'form'])
     options.uri = url.format(@_request)
     request(options, (error, response, body) =>
       if error
