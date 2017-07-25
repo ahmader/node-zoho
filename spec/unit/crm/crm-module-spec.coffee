@@ -173,7 +173,7 @@ describe 'crm module', ->
     it 'builds Url', ->
       crmModule.insertRecords([record],undefined)
       expect(crmModule.buildUrl).toHaveBeenCalledWith(
-        {newFormat:1,xmlData:'<?xml version="1.0" encoding="UTF-8"?><crmModule/>'},
+        {newFormat:1},
         ['insertRecords'],
         {method:'POST'}
       )
