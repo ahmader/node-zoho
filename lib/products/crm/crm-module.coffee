@@ -292,7 +292,8 @@ class CrmModule extends BaseModule
       if err
         if _.isFunction(cb) then cb(err,null)
       else
-        processed = @processRecord(response.data)
+        processed = for record in response.data
+          @processRecord(record)
         response.data = processed
         if _.isFunction(cb) then cb(null,response)
     )
