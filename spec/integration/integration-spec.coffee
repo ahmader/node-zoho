@@ -39,6 +39,30 @@ if config.authToken and config.enabled
         # expect(results.isError()).toBeFalsy()
         #
 
+    it "can create multiple leads", ->
+      lead =
+        "Lead Source" : "Site Registration"
+        "First Name"  : "Test"
+        "Last Name"   : "Testerson"
+        "Email"       : "test@testerson.com"
+
+      runs ->
+        za.execute('crm','Leads','insertRecords',[lead, lead], (err, _response) ->
+          errors = err
+          response = _response
+          done = true
+        )
+
+      waitsFor ->
+        return done
+
+      runs ->
+        expect(errors).toBe(null)
+        expect(response).toBeDefined()
+        expect(response.data).toBeDefined()
+        expect(response.data).toEqual(jasmine.any(Array))
+        expect(response.data.length).toBeGreaterThan(1)
+        
     describe "events", ->
       event =
         "Subject": "Conference"
@@ -76,7 +100,7 @@ if config.authToken and config.enabled
 
         runs ->
           done = false
-          za.execute('crm','Events','getRecordById',response.data.Id, (err, _response) ->
+          za.execute('crm','Events','getRecordById',response.data[0].Id, (err, _response) ->
             errors = err
             response = _response
             done = true
