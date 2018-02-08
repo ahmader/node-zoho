@@ -50,7 +50,7 @@ module.exports = function(grunt) {
       updateConfigs: [],
       commit: true,
       commitMessage: 'Release v%VERSION%',
-      commitFiles: ['package.json', 'npm-shrinkwrap.json'], // '-a' for all files
+      commitFiles: ['npm-shrinkwrap.json', 'package.json'], // ['-a'] for all files
       createTag: true,
       tagName: 'v%VERSION%',
       tagMessage: 'Version %VERSION%',
