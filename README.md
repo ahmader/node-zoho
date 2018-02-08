@@ -257,7 +257,7 @@ All the code is coffescript, but we deploy compiled js to npm. If you want to he
 # Release instructions
 
 1. Wait for TravisCI confirmation that latest merge passes tests.
-2. Run `grunt bump`. This bumps the package.json version, tags this version and pushes it.
+2. Run `grunt release`. This bumps the package.json version, creates npm-shrinkwrap.json, tags this version and pushes it.
 3. `npm publish` will compile the CoffeeScript and push the latest version to npmjs.org
 
 [![NPM](https://nodei.co/npm/node-zoho.png?downloads=true)](https://nodei.co/npm/node-zoho/)
