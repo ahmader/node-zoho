@@ -69,5 +69,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['coffeelint', 'spec:unit'] );
   grunt.registerTask('integration', ['coffeelint', 'spec:integration']);
   grunt.registerTask('travis-ci', ['coffeelint', 'spec:unit'] );
-  grunt.registerTask('release', ['bump-only:patch', '', 'bump-commit'] );
+  grunt.registerTask('release', ['bump-only:patch', 'shrinkwrap', 'bump-commit'] );
 };
