@@ -18,7 +18,9 @@ module.exports = function(grunt) {
         }
       },
       integration: {
-        specs: 'spec/integration/**/*.{js,coffee}'
+        options: {
+          specs: 'spec/integration/**/*.{js,coffee}'
+        }
       }
     },
     coffeelint: {
@@ -38,12 +40,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    shrinkwrap: {
+      dev: false, // whether the shrinkwrap dev dependencies. Defaults to false. 
+      dedupe: false, // whether to run dedupe before shrinkwrapping.  Defaults to false. 
+      prune: false // whether to run prune before deduping. Defaults to false. 
+    },
     bump: {
       files: ['package.json'],
       updateConfigs: [],
       commit: true,
       commitMessage: 'Release v%VERSION%',
-      commitFiles: ['package.json'], // '-a' for all files
+      commitFiles: ['npm-shrinkwrap.json', 'package.json'], // ['-a'] for all files
       createTag: true,
       tagName: 'v%VERSION%',
       tagMessage: 'Version %VERSION%',
@@ -56,10 +63,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jasmine-bundle');
+  grunt.loadNpmTasks('grunt-shrinkwrap');
   grunt.loadNpmTasks('grunt-bump');
 
   grunt.registerTask('default', ['coffeelint', 'spec:unit'] );
   grunt.registerTask('integration', ['coffeelint', 'spec:integration']);
   grunt.registerTask('travis-ci', ['coffeelint', 'spec:unit'] );
-  grunt.registerTask('release', ['bump'] );
+  grunt.registerTask('release', ['bump-only:patch', 'shrinkwrap', 'bump-commit'] );
 };
