@@ -15,29 +15,30 @@
     "Picatic E-Tickets Inc. <api@picatic.com>"
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/ahmader/node-zoho.git"
   },
   "dependencies": {
-    "xml2js": "0.4.2",
-    "coffee-script": "~1.7.0",
-    "underscore": "~1.6.0",
-    "async": "~0.2.9",
-    "request": "~2.34.0"
+    "async": "^2.6.0",
+    "coffeescript": "^2.2.1",
+    "request": "^2.83.0",
+    "underscore": "^1.8.3",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "grunt": "0.4.4",
-    "grunt-jasmine-node": "~0.2.1",
-    "grunt-coffeelint": "0.0.10",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-jasmine-bundle": "~0.2.0",
-    "grunt-bump": "0.0.13"
+    "grunt": "^1.0.2",
+    "grunt-bump": "^0.8.0",
+    "grunt-coffeelint": "0.0.16",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-jasmine-bundle": "^0.4.0",
+    "grunt-jasmine-node": "^0.3.1",
+    "grunt-shrinkwrap": "^1.1.1"
   },
   "scripts": {
-    "prepublish": "coffee --bare --compile --output build lib",
+    "prepare": "coffee --bare --compile --output build lib",
     "test": "grunt travis-ci"
   }
 }
