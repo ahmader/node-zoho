@@ -93,9 +93,6 @@ class Leads extends CrmModule
   deleteFile: ->
     throw new Error('Not Implemented')
 
-  uploadPhoto: ->
-    throw new Error('Not Implemented')
-
   downloadPhoto:  ->
     throw new Error('Not Implemented')
 
