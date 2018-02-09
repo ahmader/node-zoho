@@ -190,6 +190,18 @@ describe 'crm module', ->
       runs ->
         expect(r).toEqual(response)
 
+    it 'calls callback with options with response', ->
+      r = undefined
+      runs ->
+        crmModule.insertRecords([record], {}, (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
+
   describe 'getRecordById', ->
     next = response = undefined
 
