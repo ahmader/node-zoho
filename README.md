@@ -166,12 +166,12 @@ Currently a WIP, but feel free to ask how you can help.
 </tr>
 <tr>
   <td>uploadFile</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>downloadFile</td>
