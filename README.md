@@ -32,8 +32,8 @@ Currently a WIP, but feel free to ask how you can help.
 <tr>
   <td>insertRecords</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
@@ -50,8 +50,8 @@ Currently a WIP, but feel free to ask how you can help.
 <tr>
   <td>getRecordById</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
@@ -86,29 +86,29 @@ Currently a WIP, but feel free to ask how you can help.
 <tr>
   <td>updateRecords</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
   <td>✓</td>
   <td>✓</td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>searchRecords</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
   <td>✓</td>
   <td>✓</td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>getSearchRecords</td>
   <td>✓</td>
-  <td></td>
-  <td></td>
   <td>✓</td>
   <td>✓</td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>getSearchRecordsByPDC</td>
@@ -144,7 +144,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
-  <td></td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>updateRelatedRecords</td>
@@ -193,12 +193,12 @@ Currently a WIP, but feel free to ask how you can help.
 </tr>
 <tr>
   <td>uploadPhoto</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>downloadPhoto</td>
@@ -229,8 +229,8 @@ More to come...
 ```
 var Zoho = require('node-zoho');
 
-zoho = new Zoho({authToken:'API-TOKEN'});
-records = [
+var zoho = new Zoho({authToken:'API-TOKEN'});
+var records = [
   {
     "Lead Source" : "Site Registration",
     "First Name"  : "Test",
@@ -239,15 +239,21 @@ records = [
   }
 ];
 
-zoho.execute('crm', 'Leads', 'insertRecords', records, function (err, result) {
+zoho.execute('crm', 'Leads', 'insertRecords', records, callback);
+
+// to pass optional parameters
+zoho.execute('crm', 'Leads', 'insertRecords', records, {wfTrigger: true}, callback);
+
+var callback = function (err, result) {
   if (err !== null) {
     console.log(err);
   } else if (result.isError()) {
     console.log(result.message);
   } else {
-    console.log(result.data);
+    console.log(result.data); // typeof Array
   }
-});
+}
+
 ```
 
 # Contribute
