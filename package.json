@@ -38,11 +38,12 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-jasmine-bundle": "^0.4.0",
     "grunt-jasmine-node": "^0.3.1",
-    "grunt-shrinkwrap": "^1.1.1"
+    "grunt-shrinkwrap": "^1.1.1",
+    "gruntify-eslint": "^4.0.0"
   },
   "scripts": {
     "prepare": "coffee --bare --compile --output build lib",
-    "lint": "eslint lib --ext .coffee",
+    "lint": "eslint lib/ --ext .coffee",
     "test": "grunt travis-ci"
   }
 }

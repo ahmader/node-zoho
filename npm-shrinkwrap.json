@@ -429,7 +429,7 @@
     },
     "eslint": {
       "version": "4.17.0",
-      "from": "eslint@latest",
+      "from": "eslint@>=4.0.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/eslint/-/eslint-4.17.0.tgz",
       "dev": true,
       "dependencies": {
@@ -441,13 +441,13 @@
         },
         "ansi-styles": {
           "version": "3.2.0",
-          "from": "ansi-styles@>=3.2.0 <4.0.0",
+          "from": "ansi-styles@^3.2.0",
           "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-3.2.0.tgz",
           "dev": true
         },
         "chalk": {
           "version": "2.3.1",
-          "from": "chalk@>=2.1.0 <3.0.0",
+          "from": "chalk@^2.1.0",
           "resolved": "https://registry.npmjs.org/chalk/-/chalk-2.3.1.tgz",
           "dev": true
         },
@@ -507,7 +507,7 @@
         },
         "supports-color": {
           "version": "5.2.0",
-          "from": "supports-color@>=5.2.0 <6.0.0",
+          "from": "supports-color@^5.2.0",
           "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-5.2.0.tgz",
           "dev": true
         }
@@ -515,7 +515,7 @@
     },
     "eslint-plugin-coffeescript": {
       "version": "0.2.1",
-      "from": "eslint-plugin-coffeescript@latest",
+      "from": "eslint-plugin-coffeescript@>=0.2.1 <0.3.0",
       "resolved": "https://registry.npmjs.org/eslint-plugin-coffeescript/-/eslint-plugin-coffeescript-0.2.1.tgz",
       "dev": true
     },
@@ -916,6 +916,12 @@
       "version": "1.1.1",
       "from": "grunt-shrinkwrap@>=1.1.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/grunt-shrinkwrap/-/grunt-shrinkwrap-1.1.1.tgz",
+      "dev": true
+    },
+    "gruntify-eslint": {
+      "version": "4.0.0",
+      "from": "gruntify-eslint@latest",
+      "resolved": "https://registry.npmjs.org/gruntify-eslint/-/gruntify-eslint-4.0.0.tgz",
       "dev": true
     },
     "har-schema": {
