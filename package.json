@@ -3,7 +3,8 @@
   "version": "0.0.32",
   "description": "Simple Zoho integrations for Node.js",
   "keywords": [
-    "zoho", "node"
+    "zoho",
+    "node"
   ],
   "main": "build/node-zoho",
   "private": false,
@@ -29,6 +30,8 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-plugin-coffeescript": "^0.2.1",
     "grunt": "^1.0.2",
     "grunt-bump": "^0.8.0",
     "grunt-coffeelint": "0.0.16",
@@ -39,6 +42,7 @@
   },
   "scripts": {
     "prepare": "coffee --bare --compile --output build lib",
+    "lint": "eslint lib --ext .coffee",
     "test": "grunt travis-ci"
   }
 }

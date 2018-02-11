@@ -1,0 +1,17 @@
+{
+  "env": {
+      "node": true,
+      "es6": true,
+  },
+  "globals": {
+    
+  },
+  "plugins": [
+      "coffeescript"
+  ],
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "no-console": ["off", { allow: ["info","log"] }],
+    "no-extra-semi" : ["off", {}],
+  },
+}
