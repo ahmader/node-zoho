@@ -40,9 +40,6 @@ class Invoices extends CrmModule
   getUsers: ->
     throw new Error('Not Implemented')
 
-  uploadFile: ->
-    throw new Error('Not Implemented')
-
   downloadFile: ->
     throw new Error('Not Implemented')
 

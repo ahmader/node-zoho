@@ -329,6 +329,30 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
+  uploadFile: (id, file, descriptor, cb) ->
+    query = {}
+    options = {method: 'POST'}
+
+    url = @buildUrl query, ['uploadFile'], options
+    request = new Request(@, url)
+
+    r = request.request (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord(response.data)
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+
+    form = r.form()
+    form.append('id', id)
+    if _.isString(file)
+      form.append('attachmentUrl', file)
+    else
+      form.append('content', file, descriptor)
+
+    return r
+      
   uploadPhoto: (id, file, descriptor, cb) ->
     if @name is 'Contacts' or  @name is 'Leads'
       query = {}
@@ -348,8 +372,8 @@ class CrmModule extends BaseModule
       form = r.form()
       form.append('id', id)
       form.append('content', file, descriptor)
-    else throw new Error('Not available')
 
-    return r
+      return r
+    else throw new Error('Not available')
 
 module.exports = CrmModule

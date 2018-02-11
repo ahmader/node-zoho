@@ -309,3 +309,52 @@ describe 'crm module', ->
         return next
       runs ->
         expect(r).toEqual(response)
+
+  describe 'uploadFile', ->
+    fakeForm = fakeFile = fakeDescriptor = response = undefined
+
+    beforeEach ->
+      fakeForm = {append: ->}
+      fakeFile = {}
+      fakeDescriptor = {}
+      response = {a: 1}
+
+      spyOn(crmModule,'buildUrl').andReturn({})
+      spyOn(Request.prototype, 'request').andCallFake( (cb) ->
+        setImmediate(cb, null, response)
+
+        {form: -> fakeForm}
+      )
+
+    it 'builds correct url', ->
+      crmModule.uploadFile '1234567890123456', fakeFile, fakeDescriptor
+
+      expect(crmModule.buildUrl).toHaveBeenCalledWith {}, ['uploadFile'], {method: 'POST'}
+
+    it 'appends data into multipart request', ->
+      spy = spyOn fakeForm, 'append'
+
+      crmModule.uploadFile '1234567890123456', fakeFile, fakeDescriptor
+
+      expect(spy).toHaveBeenCalledWith 'id', '1234567890123456'
+      expect(spy).toHaveBeenCalledWith 'content', fakeFile, fakeDescriptor
+
+    it 'appends file url to request', ->
+      fakeFile = 'http://fake.string/url.ext'
+      spy = spyOn fakeForm, 'append'
+
+      crmModule.uploadFile '1234567890123456', fakeFile, fakeDescriptor
+
+      expect(spy).toHaveBeenCalledWith 'id', '1234567890123456'
+      expect(spy).toHaveBeenCalledWith 'attachmentUrl', fakeFile
+
+    it 'calls callback with response', ->
+      spy = jasmine.createSpy('callback')
+
+      crmModule.uploadFile '1234567890123456', fakeFile, fakeDescriptor, spy
+
+      waitsFor ->
+        if (spy.callCount == 1)
+          expect(spy).toHaveBeenCalledWith(null, {a: 1, data: {}})
+
+          true
