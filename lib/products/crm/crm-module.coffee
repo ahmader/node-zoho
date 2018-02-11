@@ -20,7 +20,7 @@ class CrmModule extends BaseModule
         })
       else
         if typeof v=='undefined'
-         v = ''
+          v = ''
         result.push({
           $:
             val: k
@@ -92,19 +92,19 @@ class CrmModule extends BaseModule
     if _.isObject(record)
       if _.has(record,'FL')
         result = record.$
-        result.fields = [];
+        result.fields = []
         for i,fl of record.FL
           field = fl.$
           if _.has(fl,'val')
-            _val = fl.val;
-            field.val = [];
+            _val = fl.val
+            field.val = []
             for c,val of _val
               if _.has(val,'_')
                 if _.has(val,'$')
-                  if val['$'].default then field.default = val['_'];
-                field.val.push(val['_']);
+                  if val['$'].default then field.default = val['_']
+                field.val.push(val['_'])
               else
-                field.val.push(val);
+                field.val.push(val)
           result.fields.push(field)
 
     return result
@@ -278,7 +278,7 @@ class CrmModule extends BaseModule
     if records.length < 1
       throw new Error('Requires as least one record')
 
-    if _.isFunction(_query) 
+    if _.isFunction(_query)
       cb = _query
       _query = {}
 

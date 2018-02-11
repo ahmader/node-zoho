@@ -48,7 +48,7 @@ class Response
           else
             @message = "Unknown Error"
 
-          return cb({code: @code, message: @message}, @);
+          return cb({code: @code, message: @message}, @)
 
         else if @data?.response?.nodata
           error = @data.response.nodata
