@@ -3,7 +3,7 @@
   "version": "0.0.29",
   "description": "Simple Zoho integrations for Node.js",
   "keywords": [
-    "zoho"
+    "zoho", "node"
   ],
   "main": "build/node-zoho",
   "private": false,
@@ -15,7 +15,7 @@
     "Picatic E-Tickets Inc. <api@picatic.com>"
   ],
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "repository": {
     "type": "git",
