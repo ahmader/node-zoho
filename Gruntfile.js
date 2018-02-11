@@ -41,7 +41,7 @@ module.exports = function(grunt) {
       }
     },
     shrinkwrap: {
-      dev: false, // whether the shrinkwrap dev dependencies. Defaults to false. 
+      dev: true, // whether the shrinkwrap dev dependencies. Defaults to false. 
       dedupe: false, // whether to run dedupe before shrinkwrapping.  Defaults to false. 
       prune: false // whether to run prune before deduping. Defaults to false. 
     },
