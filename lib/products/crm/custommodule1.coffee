@@ -15,7 +15,7 @@ class CustomModule1 extends CrmModule
 
   deleteRecords: ->
     throw new Error('Not Implemented')
-    
+
   convertLead: ->
     throw new Error('Not Implemented')
 
