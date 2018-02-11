@@ -145,13 +145,3 @@ describe 'leads', ->
           expect(spy).toHaveBeenCalledWith(null, {a: 1, data: {}})
 
           true
-
-
-
-
-
-
-
-
-
-
