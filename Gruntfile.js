@@ -41,22 +41,24 @@ module.exports = function(grunt) {
       }
     },
     shrinkwrap: {
-      dev: false, // whether the shrinkwrap dev dependencies. Defaults to false. 
+      dev: true, // whether the shrinkwrap dev dependencies. Defaults to false. 
       dedupe: false, // whether to run dedupe before shrinkwrapping.  Defaults to false. 
       prune: false // whether to run prune before deduping. Defaults to false. 
     },
     bump: {
-      files: ['package.json'],
-      updateConfigs: [],
-      commit: true,
-      commitMessage: 'Release v%VERSION%',
-      commitFiles: ['npm-shrinkwrap.json', 'package.json'], // ['-a'] for all files
-      createTag: true,
-      tagName: 'v%VERSION%',
-      tagMessage: 'Version %VERSION%',
-      push: false,
-      // pushTo: 'origin',
-      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+      options: {
+        files: ['package.json'],
+        updateConfigs: [],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json', 'npm-shrinkwrap.json'], // ['-a'] for all files
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: false,
+        // pushTo: 'origin',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+      }
     }
   });
 
@@ -69,5 +71,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['coffeelint', 'spec:unit'] );
   grunt.registerTask('integration', ['coffeelint', 'spec:integration']);
   grunt.registerTask('travis-ci', ['coffeelint', 'spec:unit'] );
-  grunt.registerTask('release', ['bump-only:patch', 'shrinkwrap', 'bump-commit'] );
+  grunt.registerTask('release', ['bump:patch:bump-only', 'shrinkwrap', 'bump::commit-only'] );
 };
