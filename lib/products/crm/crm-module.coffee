@@ -272,16 +272,20 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
-  insertRecords: (records, cb) ->
+  insertRecords: (records, _query, cb) ->
     if not _.isArray(records)
       throw new Error('Requires array of records')
     if records.length < 1
       throw new Error('Requires as least one record')
 
-    query = {
+    if _.isFunction(_query) 
+      cb = _query
+      _query = {}
+
+    query = _.extend({
       newFormat: 1,
       xmlData: @build(records)
-    }
+    }, _query)
     options = {
       method: 'POST'
     }
