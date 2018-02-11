@@ -66,16 +66,10 @@ class Potentials extends CrmModule
   getUsers: ->
     throw new Error('Not Implemented')
 
-  uploadFile: ->
-    throw new Error('Not Implemented')
-
   downloadFile: ->
     throw new Error('Not Implemented')
 
   deleteFile: ->
-    throw new Error('Not Implemented')
-
-  uploadPhoto: ->
     throw new Error('Not Implemented')
 
   downloadPhoto:  ->
