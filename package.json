@@ -1,6 +1,6 @@
 {
   "name": "node-zoho",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "Simple Zoho integrations for Node.js",
   "keywords": [
     "zoho",
