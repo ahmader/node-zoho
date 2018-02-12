@@ -1,8 +1,4 @@
-_ = require('underscore')
-xml2js = require("xml2js")
-
 CrmModule = require('./crm-module')
-Request = require('../../request')
 
 class Events extends CrmModule
   name: 'Events'
@@ -16,46 +12,8 @@ class Events extends CrmModule
   deleteRecords: ->
     throw new Error('Not Implemented')
 
-  convertLead: (lead_id, options, cb) ->
-    if not lead_id
-      throw new Error('Requires a Lead Id')
-    if not options
-      throw new Error('Requires an options')
-    defaults = {
-      createPotential: false,
-      assignTo: null,
-      notifyLeadOwner: true,
-      notifyNewEntityOwner: true
-    }
-    _.defaults(options,options)
-    records = [ _.pick(options,['createPotential','assignTo','notifyLeadOwner','notifyNewEntityOwner'])]
-
-    if options.createPotential == true and not _.isObject(options.potential)
-      throw new Error('Requires a potential')
-    else if options.createPotential == true
-      records.push(options.potential)
-
-
-    query = {
-      leadId: lead_id
-      newFormat: 1,
-      xmlData: @build(records)
-    }
-    options = {
-      method: 'POST'
-    }
-
-    url = @buildUrl(query,['convertLead'],options)
-    request = new Request(@, url)
-
-    request.request( (err,response) =>
-      if err
-        if _.isFunction(cb) then cb(err,null)
-      else
-        processed = @processRecord(response.data)
-        response.data = processed
-        if _.isFunction(cb) then cb(null,response)
-    )
+  convertLead: ->
+    throw new Error('Not Implemented')
 
   getRelatedRecords: ->
     throw new Error('Not Implemented')

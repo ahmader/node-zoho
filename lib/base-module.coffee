@@ -14,8 +14,11 @@ class BaseModule
     return [ @scope, @format, @name ]
 
   buildUrl: (query={}, path=[], options={}) ->
+    method = 'POST'
+    if options?.method
+      method = options.method.toUpperCase()
     url = @product.getBaseUrl()
-    url.method = 'POST'
+    url.method = method
     url.path = url.path.concat(@getUrlParts())
     url.path = url.path.concat(path)
     url.pathname = "/" + url.path.join("/")

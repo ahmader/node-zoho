@@ -1,9 +1,3 @@
-url = require("url")
-https = require("https")
-_ = require("underscore")
-async = require("async")
-xml2js = require("xml2js")
-
 class Zoho
   authToken: null
 
@@ -19,7 +13,7 @@ class Zoho
     return @
 
   getProduct: (productName) ->
-    Crm = require './products/crm'
+    Crm = require './products/' + productName
     return new Crm(@)
 
   execute: (product, module, call) ->

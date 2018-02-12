@@ -1,5 +1,4 @@
 _ = require('underscore')
-xml2js = require("xml2js")
 
 CrmModule = require('./crm-module')
 Request = require('../../request')
@@ -27,7 +26,7 @@ class Leads extends CrmModule
       notifyLeadOwner: true,
       notifyNewEntityOwner: true
     }
-    _.defaults(options,options)
+    _.defaults(options,defaults)
     records = [ _.pick(options,['createPotential','assignTo','notifyLeadOwner','notifyNewEntityOwner'])]
 
     if options.createPotential == true and not _.isObject(options.potential)
