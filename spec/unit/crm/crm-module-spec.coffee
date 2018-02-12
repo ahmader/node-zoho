@@ -343,7 +343,7 @@ describe 'crm module', ->
       fakeFile = 'http://fake.string/url.ext'
       spy = spyOn fakeForm, 'append'
 
-      crmModule.uploadFile '1234567890123456', fakeFile, fakeDescriptor
+      crmModule.uploadFile '1234567890123456', fakeFile
 
       expect(spy).toHaveBeenCalledWith 'id', '1234567890123456'
       expect(spy).toHaveBeenCalledWith 'attachmentUrl', fakeFile
