@@ -80,10 +80,17 @@ class CrmModule extends BaseModule
             _.each(v, (_v) =>
               _.extend(result[k],@processRecord(_v))
             )
+          else if _.has(v, 'code')
+            infoKeys = ['code', 'message']
+            result[k] = {}
+            for i, key of infoKeys
+              result[k][key] = v[key][0]
       else if _.has(record,'_') and _.has(record,'$') and _.has(record.$,'param')
         result[record.$.param] = record._
       else if _.has(record,'_') and _.has(record,'$') and _.has(record.$,'val')
         result[record.$.val] = record._
+      else if _.has(record,'response')
+        result = @processRecord(record['response'])
 
     return result
 
