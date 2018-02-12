@@ -352,6 +352,26 @@ class CrmModule extends BaseModule
       form.append('content', file, descriptor)
 
     return r
+
+  deleteFile: (id, cb) ->
+    query = {}
+    options = {method: 'POST'}
+
+    url = @buildUrl query, ['deleteFile'], options
+    request = new Request(@, url)
+
+    r = request.request (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord(response.data)
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+
+    form = r.form()
+    form.append('id', id)
+
+    return r
       
   uploadPhoto: (id, file, descriptor, cb) ->
     if @name is 'Contacts' or  @name is 'Leads'
