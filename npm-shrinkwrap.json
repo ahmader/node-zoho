@@ -1,6 +1,6 @@
 {
   "name": "node-zoho",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "dependencies": {
     "abbrev": {
       "version": "1.1.1",
