@@ -1,19 +1,9 @@
-_ = require('underscore')
-xml2js = require("xml2js")
-
 CrmModule = require('./crm-module')
-Request = require('../../request')
 
 class Notes extends CrmModule
   name: 'Notes'
 
   getMyRecords: ->
-    throw new Error('Not Implemented')
-
-  getRecords: (_query, cb) ->
-    throw new Error('Not Implemented')
-
-  getRecordById: (id, cb) ->
     throw new Error('Not Implemented')
 
   updateRecords: ->

@@ -29,9 +29,9 @@ module.exports = function(grunt) {
           level: 'ignore'
         }
       },
-      app: {
+      lib: {
         files: {
-          src: ['spec/**/*.coffee']
+          src: ['lib/**/*.coffee']
         }
       },
       spec: {
@@ -44,6 +44,9 @@ module.exports = function(grunt) {
       dev: true, // whether the shrinkwrap dev dependencies. Defaults to false. 
       dedupe: false, // whether to run dedupe before shrinkwrapping.  Defaults to false. 
       prune: false // whether to run prune before deduping. Defaults to false. 
+    },
+    eslint: {
+      lib: ['lib/**/*.coffee']
     },
     bump: {
       options: {
@@ -66,10 +69,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jasmine-bundle');
   grunt.loadNpmTasks('grunt-shrinkwrap');
+  grunt.loadNpmTasks("gruntify-eslint");
   grunt.loadNpmTasks('grunt-bump');
 
-  grunt.registerTask('default', ['coffeelint', 'spec:unit'] );
-  grunt.registerTask('integration', ['coffeelint', 'spec:integration']);
-  grunt.registerTask('travis-ci', ['coffeelint', 'spec:unit'] );
+  grunt.registerTask('default', ['coffeelint', 'eslint', 'spec:unit'] );
+  grunt.registerTask('integration', ['coffeelint', 'eslint', 'spec:integration']);
+  grunt.registerTask('travis-ci', ['coffeelint', 'eslint', 'spec:unit'] );
   grunt.registerTask('release', ['bump:patch:bump-only', 'shrinkwrap', 'bump::commit-only'] );
 };
