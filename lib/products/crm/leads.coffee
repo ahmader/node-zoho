@@ -22,7 +22,7 @@ class Leads extends CrmModule
       throw new Error('Requires an options')
     defaults = {
       createPotential: false,
-      assignTo: null,
+      assignTo: '',
       notifyLeadOwner: true,
       notifyNewEntityOwner: true
     }
