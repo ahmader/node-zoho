@@ -184,12 +184,12 @@ Currently a WIP, but feel free to ask how you can help.
 </tr>
 <tr>
   <td>deleteFile</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>uploadPhoto</td>

@@ -85,6 +85,25 @@ class Response
 
             else
               return cb(new Error("Multi result arrays not handled"), @)
+          else if @data?.response?.success
+            success = @data.response.success
+            
+            if _.isArray(success)
+              success = _.first(success)
+
+            if success?.code
+              @code = success.code
+              if _.isArray(@code)
+                @code = _.first(@code)
+
+            if success?.message
+              @message = success.message
+              if _.isArray(@message)
+                @message = _.first(@message)
+            else
+              @message = "Unknown Success"
+            
+            @data = {'success' : {'code': @code, 'message': @message}}
 
           return cb(null, @)
 

@@ -6,7 +6,7 @@ config = require('../config.json')
 if config.authToken and config.enabled
 
   describe "integration", ->
-    response = errors = done = za = undefined
+    response = errors = done = za = event_id = file_id = undefined
 
     beforeEach ->
       response = errors = done = undefined
@@ -83,7 +83,7 @@ if config.authToken and config.enabled
           return done
 
         runs ->
-          event_id = response.data.Id
+          event_id = response.data[0].Id
           expect(errors).toBe(null)
           expect(response).toBeDefined()
 
@@ -100,7 +100,7 @@ if config.authToken and config.enabled
 
         runs ->
           done = false
-          za.execute('crm','Events','getRecordById',response.data[0].Id, (err, _response) ->
+          za.execute('crm','Events','getRecordById', event_id, (err, _response) ->
             errors = err
             response = _response
             done = true
@@ -128,4 +128,42 @@ if config.authToken and config.enabled
           expect(errors).toBe(null)
           expect(response).toBeDefined()
           expect(response.data).toEqual(jasmine.any(Array))
+
+    describe "files", ->
+      file = "https://picsum.photos/200/300/?random"
+      
+      it "can upload file", ->
+        runs ->
+          za.execute('crm','Events','uploadFile', event_id, file, false, (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          file_id = response.data.Id
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
+          expect(response.data).toBeDefined()
+          expect(response.data.Id).toBeDefined()
+
+      it "can delete file", ->
+        runs ->
+          za.execute('crm','Events','deleteFile', file_id, (err, _response) ->
+            errors = err
+            response = _response
+            done = true
+          )
+
+        waitsFor ->
+          return done
+
+        runs ->
+          expect(errors).toBe(null)
+          expect(response).toBeDefined()
+          expect(response.data).toBeDefined()
+          expect(response.data.success).toBeDefined()
 
