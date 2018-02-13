@@ -346,10 +346,10 @@ class CrmModule extends BaseModule
 
     form = r.form()
     form.append('id', id)
-    if _.isString(file)
-      form.append('attachmentUrl', file)
-    else
+    if descriptor
       form.append('content', file, descriptor)
+    else
+      form.append('attachmentUrl', file)
 
     return r
       
