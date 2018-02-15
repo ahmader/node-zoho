@@ -3,7 +3,7 @@ BaseProduct = require('../../../lib/base-product')
 
 describe 'crm', ->
   Crm = undefined
-  zoho = { authToken: 'fake-token' }
+  zoho = { authToken: 'fake-token', region: 'com' }
 
   beforeEach ->
     Crm = new CrmProduct(zoho)
