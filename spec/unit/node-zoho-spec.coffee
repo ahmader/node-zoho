@@ -78,4 +78,11 @@ describe "node-zoho", ->
         runs ->
           expect(help.request).toHaveBeenCalledWith({ host : 'accounts.zoho.com', port : 443, path : '/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi&EMAIL_ID=cool@picatic.com&PASSWORD=seriously, cool', method : 'POST' }, jasmine.any(Function))
 
+    describe "test Zoho region", ->
+      it "has default region", ->
+        expect(zohoApi.region).toEqual('com')
 
+      it "has specified region", ->
+        options.region = 'eu'
+        zohoApi = new zoho(options)
+        expect(zohoApi.region).toEqual('eu')
