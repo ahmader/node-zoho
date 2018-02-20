@@ -24,7 +24,7 @@ class CrmProduct extends BaseProduct
 
   getBaseUrl: ->
     return {
-      hostname: 'crm.zoho.' + @zoho.region
+      hostname: "crm.zoho.#{@zoho.region}"
       protocol: 'https'
       query: {
         authtoken: @zoho.authToken

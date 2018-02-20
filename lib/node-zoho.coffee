@@ -7,7 +7,7 @@ class Zoho
       @region = options.region
 
     @authDefaults =
-      host: "accounts.zoho." + @region
+      host: "accounts.zoho.#{@region}"
       port: 443
       path: "/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmapi"
 
