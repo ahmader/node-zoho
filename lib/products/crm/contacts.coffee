@@ -27,9 +27,6 @@ class Contacts extends CrmModule
   downloadFile: ->
     throw new Error('Not Implemented')
 
-  deleteFile: ->
-    throw new Error('Not Implemented')
-
   downloadPhoto:  ->
     throw new Error('Not Implemented')
 

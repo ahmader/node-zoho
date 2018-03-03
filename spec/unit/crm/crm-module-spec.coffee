@@ -358,3 +358,40 @@ describe 'crm module', ->
           expect(spy).toHaveBeenCalledWith(null, {a: 1, data: {}})
 
           true
+
+  describe 'deleteFile', ->
+    fakeForm = response = undefined
+
+    beforeEach ->
+      fakeForm = {append: ->}
+      response = {a: 1}
+
+      spyOn(crmModule,'buildUrl').andReturn({})
+      spyOn(Request.prototype, 'request').andCallFake( (cb) ->
+        setImmediate(cb, null, response)
+
+        {form: -> fakeForm}
+      )
+
+    it 'builds correct url', ->
+      crmModule.deleteFile '1234567890123456'
+
+      expect(crmModule.buildUrl).toHaveBeenCalledWith {}, ['deleteFile'], {method: 'POST'}
+
+    it 'appends id into multipart request', ->
+      spy = spyOn fakeForm, 'append'
+
+      crmModule.deleteFile '1234567890123456'
+
+      expect(spy).toHaveBeenCalledWith 'id', '1234567890123456'
+
+    it 'calls callback with response', ->
+      spy = jasmine.createSpy('callback')
+
+      crmModule.deleteFile '1234567890123456', spy
+
+      waitsFor ->
+        if (spy.callCount == 1)
+          expect(spy).toHaveBeenCalledWith(null, {a: 1, data: {}})
+
+          true

@@ -73,13 +73,16 @@ class CrmModule extends BaseModule
               if fl?.$?.val and fl?._
                 result[fl.$.val] = fl._
       else if _.has(record,'success')
-        record = record.success
-        for k,v of record
-          if k is 'Contact' or k is 'Potential'
-            result[k] = {}
-            _.each(v, (_v) =>
-              _.extend(result[k],@processRecord(_v))
-            )
+        if record?.success?.code
+          _.extend(result, record)
+        else
+          record = record.success
+          for k,v of record
+            if k is 'Contact' or k is 'Potential'
+              result[k] = {}
+              _.each(v, (_v) =>
+                _.extend(result[k],@processRecord(_v))
+              )
       else if _.has(record,'_') and _.has(record,'$') and _.has(record.$,'param')
         result[record.$.param] = record._
       else if _.has(record,'_') and _.has(record,'$') and _.has(record.$,'val')
@@ -350,6 +353,26 @@ class CrmModule extends BaseModule
       form.append('content', file, descriptor)
     else
       form.append('attachmentUrl', file)
+
+    return r
+
+  deleteFile: (id, cb) ->
+    query = {}
+    options = {method: 'POST'}
+
+    url = @buildUrl query, ['deleteFile'], options
+    request = new Request(@, url)
+
+    r = request.request (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord(response.data)
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+
+    form = r.form()
+    form.append('id', id)
 
     return r
       
