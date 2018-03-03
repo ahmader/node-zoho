@@ -18,12 +18,21 @@ class Request
   request: (cb) ->
     options = _.pick(@_request,['method'])
     options.uri = url.format(@_request)
+    chunks = new Buffer('')
     request(options, (error, response, body) =>
       if error
         cb(error,null)
       else
-        @response = new Response(response)
-        @response.parseBody(body,cb)
+        if /text\/xml/.test(response.headers['content-type'])
+          @response = new Response(response)
+          @response.parseBody(body,cb)
+        else
+          @response = new Response(response)
+          @response.parseFile(chunks,cb)
+    ).on('response', (resp) ->
+      resp.on('data', (chunk) ->
+        chunks = Buffer.concat([chunks, chunk])
+      )
     )
 
 

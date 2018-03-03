@@ -24,9 +24,6 @@ class Contacts extends CrmModule
   getUsers: ->
     throw new Error('Not Implemented')
 
-  downloadFile: ->
-    throw new Error('Not Implemented')
-
   downloadPhoto:  ->
     throw new Error('Not Implemented')
 
