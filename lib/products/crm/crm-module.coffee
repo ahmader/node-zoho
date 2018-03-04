@@ -376,6 +376,23 @@ class CrmModule extends BaseModule
 
     return r
       
+  downloadFile: (id, cb) ->
+    if not id
+      throw new Error('Requires id to download')
+
+    query = {id: id}
+    options = {method: 'POST'}
+
+    url = @buildUrl query, ['downloadFile'], options
+    request = new Request(@, url)
+
+    r = request.request (err,response) ->
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        if _.isFunction(cb) then cb(null,response)
+    return r
+      
   uploadPhoto: (id, file, descriptor, cb) ->
     if @name is 'Contacts' or  @name is 'Leads'
       query = {}

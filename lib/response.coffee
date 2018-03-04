@@ -1,3 +1,4 @@
+contentDisposition = require('content-disposition')
 xml2js = require("xml2js")
 _ = require('underscore')
 
@@ -21,6 +22,16 @@ class Response
     if @code != null
       return true
     return false
+
+  parseFile: (buffer, cb) ->
+    if not buffer and Buffer.isBuffer(buffer)
+      throw new Error('Requires buffer')
+    if not cb
+      throw new Error('Requires callback')
+    disposition = contentDisposition.parse(@_response.headers['content-disposition'])
+    filename = disposition.parameters.filename
+    @_data = @data = {filename: filename, buffer: buffer}
+    return cb(null, @)
 
   parseBody: (body, cb) ->
     if not body
