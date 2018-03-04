@@ -1,5 +1,6 @@
 {
   "enabled": false,
   "image": "",
+  "delete": false,
   "authToken": null
 }

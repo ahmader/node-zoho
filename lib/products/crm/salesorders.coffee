@@ -3,25 +3,10 @@ CrmModule = require('./crm-module')
 class SalesOrders extends CrmModule
   name: 'SalesOrders'
 
-  getMyRecords: ->
-    throw new Error('Not Implemented')
-
-  updateRecords: ->
-    throw new Error('Not Implemented')
-
-  getSearchRecords: ->
-    throw new Error('Not Implemented')
-
   getSearchRecordsByPDC: ->
     throw new Error('Not Implemented')
 
-  deleteRecords: ->
-    throw new Error('Not Implemented')
-
   getRelatedRecords: ->
-    throw new Error('Not Implemented')
-
-  getFields: ->
     throw new Error('Not Implemented')
 
   updateRelatedRecords: ->
