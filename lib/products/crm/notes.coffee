@@ -15,9 +15,6 @@ class Notes extends CrmModule
   getSearchRecordsByPDC: ->
     throw new Error('Not Implemented')
 
-  deleteRecords: ->
-    throw new Error('Not Implemented')
-
   getRelatedRecords: ->
     throw new Error('Not Implemented')
 

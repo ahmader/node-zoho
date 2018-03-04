@@ -3,13 +3,7 @@ CrmModule = require('./crm-module')
 class Contacts extends CrmModule
   name: 'Contacts'
 
-  getMyRecords: ->
-    throw new Error('Not Implemented')
-
   getSearchRecordsByPDC: ->
-    throw new Error('Not Implemented')
-
-  deleteRecords: ->
     throw new Error('Not Implemented')
 
   convertLead: ->

@@ -172,6 +172,62 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
+  getMyRecords: (_query, cb) ->
+    query = _.extend({
+      newFormat: 1
+    }, _query)
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['getMyRecords'],options)
+
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        _data = response.data
+        response.data = Array()
+
+        if _data?[@name]
+          for row of _data[@name][0].row
+            processed = @processRecord(_data[@name][0].row[row])
+            if processed
+              response.data.push(processed)
+
+
+        if _.isFunction(cb) then cb(null,response)
+    )
+
+  deleteRecords: (id, cb) ->
+    if not id
+      throw new Error('Requires an Id to delete')
+
+    query = {
+      id: id
+      newFormat: 1
+    }
+
+    options = {
+      method: 'GET'
+    }
+
+    url = @buildUrl(query,['deleteRecords'],options)
+    request = new Request(@, url)
+
+    request.request( (err,response) =>
+      if err
+        if _.isFunction(cb) then cb(err,null)
+      else
+        processed = @processRecord({success: response.data})
+        response.data = processed
+        if _.isFunction(cb) then cb(null,response)
+    )
+
+
   getRecordById: (id, cb) ->
     if not id
       throw new Error('Requires an Id to fetch')
