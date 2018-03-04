@@ -6,13 +6,7 @@ Request = require('../../request')
 class Potentials extends CrmModule
   name: 'Potentials'
 
-  getMyRecords: ->
-    throw new Error('Not Implemented')
-
   getSearchRecordsByPDC: ->
-    throw new Error('Not Implemented')
-
-  deleteRecords: ->
     throw new Error('Not Implemented')
 
   convertLead: (lead_id, options, cb) ->

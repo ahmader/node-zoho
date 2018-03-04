@@ -1,36 +1,35 @@
 
-Zoho CRM rest api wrapper for node.js
+Zoho CRM API REST wrapper for node.js
 
 [![Build Status](https://travis-ci.org/ahmader/node-zoho.png?branch=master)](https://travis-ci.org/ahmader/node-zoho)
 [![NPM version](https://badge.fury.io/js/node-zoho.png)](http://badge.fury.io/js/node-zoho)
 [![Code Climate](https://codeclimate.com/github/ahmader/node-zoho.png)](https://codeclimate.com/github/ahmader/node-zoho)
 [![Stories in Ready](https://badge.waffle.io/ahmader/node-zoho.png?label=ready&title=Ready)](https://waffle.io/ahmader/node-zoho)
 
-currently supports:
- - authentication
- - insertingRecord on all resources
+Supports:
+ - [Zoho CRM API Version 1.0 (EOL)](http://www.zoho.com/crm/help/api/api-methods.html)
 
 Currently a WIP, but feel free to ask how you can help.
 
-## Product and Module Support
-
-### CRM
+## CRM Modules Support:
 
 <table>
   <header>
     <tr>
-      <th>Method</th>
+      <th>Method Name</th>
       <th>Leads</th>
       <th>Accounts</th>
       <th>Contacts</th>
       <th>Potentials</th>
       <th>Events</th>
+      <th>Tasks</th>
       <th>Notes</th>
     </tr>
   </header>
   <body>
 <tr>
   <td>insertRecords</td>
+  <td>✓</td>
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
@@ -46,6 +45,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>NA</td>
   <td>NA</td>
   <td>NA</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>getRecordById</td>
@@ -55,15 +55,27 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
+</tr>
+<tr>
+  <td>getDeletedRecordIds</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>getMyRecords</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>getRecords</td>
@@ -73,15 +85,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
-</tr>
-<tr>
-  <td>getCVRecords</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>updateRecords</td>
@@ -91,6 +95,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>searchRecords</td>
@@ -100,6 +105,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>getSearchRecords</td>
@@ -109,6 +115,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>getSearchRecordsByPDC</td>
@@ -118,18 +125,21 @@ Currently a WIP, but feel free to ask how you can help.
   <td></td>
   <td></td>
   <td></td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>deleteRecords</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>getRelatedRecords</td>
+  <td></td>
   <td></td>
   <td></td>
   <td></td>
@@ -145,24 +155,17 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>✓</td>
 </tr>
 <tr>
   <td>updateRelatedRecords</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>getUsers</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>uploadFile</td>
@@ -172,6 +175,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>downloadFile</td>
@@ -181,6 +185,7 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>deleteFile</td>
@@ -190,38 +195,70 @@ Currently a WIP, but feel free to ask how you can help.
   <td>✓</td>
   <td>✓</td>
   <td>✓</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>uploadPhoto</td>
   <td>✓</td>
+  <td>NA</td>
   <td>✓</td>
-  <td>✓</td>
-  <td>✓</td>
-  <td>✓</td>
-  <td>✓</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>downloadPhoto</td>
   <td></td>
+  <td>NA</td>
   <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
 </tr>
 <tr>
   <td>deletePhoto</td>
   <td></td>
+  <td>NA</td>
   <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+</tr>
+<tr>
+  <td>delink</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+</tr>
+<tr>
+  <td>getUsers</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+</tr>
+<tr>
+  <td>getModules</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
+  <td>NA</td>
 </tr>
 </body>
 </table>
-
-More to come...
 
 
 # Example of use
@@ -250,7 +287,7 @@ var callback = function (err, result) {
   } else if (result.isError()) {
     console.log(result.message);
   } else {
-    console.log(result.data); // typeof Array
+    console.log(result.data);
   }
 }
 
@@ -268,4 +305,4 @@ All the code is coffescript, but we deploy compiled js to npm. If you want to he
 
 [![NPM](https://nodei.co/npm/node-zoho.png?downloads=true)](https://nodei.co/npm/node-zoho/)
 
-[Zoho CRM API](http://www.zoho.com/crm/help/api/api-methods.html)
+[Zoho CRM API Version 1.0 (EOL)](http://www.zoho.com/crm/help/api/api-methods.html)

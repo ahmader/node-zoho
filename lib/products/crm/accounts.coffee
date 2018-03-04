@@ -3,13 +3,7 @@ CrmModule = require('./crm-module')
 class Accounts extends CrmModule
   name: 'Accounts'
 
-  getMyRecords: ->
-    throw new Error('Not Implemented')
-
   getSearchRecordsByPDC: ->
-    throw new Error('Not Implemented')
-
-  deleteRecords: ->
     throw new Error('Not Implemented')
 
   convertLead: ->
@@ -22,9 +16,6 @@ class Accounts extends CrmModule
     throw new Error('Not Implemented')
 
   getUsers: ->
-    throw new Error('Not Implemented')
-
-  downloadFile: ->
     throw new Error('Not Implemented')
 
   downloadPhoto:  ->
