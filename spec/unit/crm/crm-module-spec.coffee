@@ -201,6 +201,71 @@ describe 'crm module', ->
         return next
       runs ->
         expect(r).toEqual(response)
+        
+  describe 'updateRecords', ->
+    response = next = undefined
+    id = '1234567890123456'
+    _query = {wfTrigger: 'true'}
+
+    beforeEach ->
+      spyOn(crmModule,'build').andReturn('<?xml version="1.0" encoding="UTF-8"?><crmModule/>')
+      response = new Response({})
+      next = false
+      spyOn(Request.prototype,'request').andCallFake( (cb) ->
+        setImmediate(cb,null,response)
+      )
+      spyOn(crmModule,'buildUrl').andReturn({})
+      spyOn(crmModule,'processRecord').andReturn({})
+
+    it 'requires id', ->
+      expect( () -> crmModule.updateRecords(0, record,() -> ) ).toThrow('Requires an Id to fetch')
+
+    it 'requires record object', ->
+      expect( () -> crmModule.updateRecords(id, 0, () -> ) ).toThrow('Requires record object')
+
+    it 'calls buildRecords', ->
+      crmModule.updateRecords(id, record, undefined)
+      expect(crmModule.build).toHaveBeenCalledWith(record)
+
+    it 'builds Url', ->
+      crmModule.updateRecords(id, record, undefined)
+      expect(crmModule.buildUrl).toHaveBeenCalledWith(
+        {newFormat:1, id: id, xmlData:'<?xml version="1.0" encoding="UTF-8"?><crmModule/>'},
+        ['updateRecords'],
+        {method:'POST'}
+      )
+
+    it 'builds Url with options', ->
+      crmModule.updateRecords(id, record, _query, undefined)
+      expect(crmModule.buildUrl).toHaveBeenCalledWith(
+        {newFormat:1, id: id, xmlData:'<?xml version="1.0" encoding="UTF-8"?><crmModule/>', wfTrigger: 'true'},
+        ['updateRecords'],
+        {method:'POST'}
+      )
+
+    it 'calls callback with response', ->
+      r = undefined
+      runs ->
+        crmModule.updateRecords(id, record, (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
+
+    it 'calls callback with options with response', ->
+      r = undefined
+      runs ->
+        crmModule.updateRecords(id, record, _query, (err,_r) ->
+          r = _r
+          next = true
+        )
+      waitsFor ->
+        return next
+      runs ->
+        expect(r).toEqual(response)
 
   describe 'getRecordById', ->
     next = response = undefined

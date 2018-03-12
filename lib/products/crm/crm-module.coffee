@@ -362,17 +362,22 @@ class CrmModule extends BaseModule
         if _.isFunction(cb) then cb(null,response)
     )
 
-  updateRecords: (id, records, cb) ->
+  updateRecords: (id, records, _query, cb) ->
     if not id
       throw new Error('Requires an Id to fetch')
     if not _.isObject(records)
       throw new Error('Requires record object')
 
-    query = {
+    if _.isFunction(_query)
+      cb = _query
+      _query = {}
+
+    query = _.extend({
       newFormat: 1,
       id: id,
       xmlData: @build(records)
-    }
+    }, _query)
+
     options = {
       method: 'POST'
     }
