@@ -266,7 +266,12 @@ Currently a WIP, but feel free to ask how you can help.
 ```
 var Zoho = require('node-zoho');
 
-var zoho = new Zoho({authToken:'API-TOKEN'});
+var config = {
+    authToken: 'API-TOKEN',
+//    region: 'eu',//default is 'com'
+};
+
+var zoho = new Zoho(config);
 var records = [
   {
     "Lead Source" : "Site Registration",
@@ -292,6 +297,30 @@ var callback = function (err, result) {
 }
 
 ```
+
+# Possible Zoho config parameters
+
+<table>
+  <header>
+    <tr>
+      <th>Parameter Name</th>
+      <th>Descripion</th>
+      <th>Default value</th>
+    </tr>
+  </header>
+  <body>
+    <tr>
+      <td>authToken</td>
+      <td>Your CRM user authtoken</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>region</td>
+      <td>Zoho CRM region. Possible values: 'com', 'eu'</td>
+      <td>com</td>
+    </tr>
+  </body>
+</table>
 
 # Contribute
 
