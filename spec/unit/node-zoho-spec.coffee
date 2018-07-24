@@ -86,3 +86,12 @@ describe "node-zoho", ->
         options.region = 'eu'
         zohoApi = new zoho(options)
         expect(zohoApi.region).toEqual('eu')
+
+    describe "test Zoho sandbox mode", ->
+      it "has default disabled sandbox mode", ->
+        expect(zohoApi.isSandbox).toEqual(false)
+
+      it "has enabled sandbox mode", ->
+        tempOptions = Object.assign({isSandbox: true}, options)
+        tempZohoApi = new zoho(tempOptions)
+        expect(tempZohoApi.isSandbox).toEqual(true)
