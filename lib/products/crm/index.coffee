@@ -23,8 +23,9 @@ class CrmProduct extends BaseProduct
     return 'crmapi'
 
   getBaseUrl: ->
+    sandboxPart = if @zoho.isSandbox then 'sandbox' else ''
     return {
-      hostname: "crm.zoho.#{@zoho.region}"
+      hostname: "crm#{sandboxPart}.zoho.#{@zoho.region}"
       protocol: 'https'
       query: {
         authtoken: @zoho.authToken

@@ -42,6 +42,10 @@ describe 'crm', ->
     it 'returns hosnamet: crm.zoho.com', ->
       expect(Crm.getBaseUrl().hostname).toBe('crm.zoho.com')
 
+    it 'returns hostname: crm.zoho.com', ->
+      sandboxCrm = new CrmProduct(Object.assign({isSandbox: true}, zoho))
+      expect(sandboxCrm.getBaseUrl().hostname).toBe('crmsandbox.zoho.com')
+
     it 'protocol https', ->
       expect(Crm.getBaseUrl().protocol).toBe('https')
 

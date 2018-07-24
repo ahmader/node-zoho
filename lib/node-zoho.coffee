@@ -1,10 +1,14 @@
 class Zoho
   authToken: null
+  isSandbox: false
   region: 'com'
 
   constructor: (options = {}) ->
     if options.region?
       @region = options.region
+
+    if options.isSandbox?
+      @isSandbox = options.isSandbox
 
     @authDefaults =
       host: "accounts.zoho.#{@region}"
